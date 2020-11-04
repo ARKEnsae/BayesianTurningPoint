@@ -4,6 +4,8 @@ Projet de statistique bayésienne sur l'article :
 
 Kaufmann, S. (2010). Dating and forecasting turning points by Bayesian clustering with dynamic structure: a suggestion with an application to Austrian data, *Journal of Applied Econometrics*, 25, 309 – 344.
 
+Disponible ici : https://arkensae.github.io/BayesianTurningPoint/Biblio/Kaufmann%2C%20S.%20(2010).pdf
+
 **Date de rendu** : 30 janvier 2021 8h.
 
 **Consignes** : 
