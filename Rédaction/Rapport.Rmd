@@ -1,0 +1,77 @@
+---
+title: |
+    |  \textsc{statistique bayésienne}
+    |  Dating and forecasting turning point by Bayesian clustering with dynamic structure
+author: |
+    | Romain Lesauvage et Alain Quartier-la-Tente
+automaticcontents: true
+output:
+  bookdown::pdf_document2:
+        toc: false
+        number_sections: true
+        fig_width: 7
+        fig_height: 6
+        fig_caption: true
+        highlight: default
+        template: default.tex
+        keep_tex: yes
+themeoptions: "coding=utf8,language=french"
+classoption: 'french'
+fontsize: 10pt
+geometry: margin=0.80in
+lang: "french"
+documentclass: "article"
+header-includes:
+- \usepackage[T1]{fontenc}
+- \usepackage{caption}
+- \usepackage{graphicx}
+- \usepackage{natbib}
+- \usepackage[dvipsnames]{xcolor}
+- \usepackage{fontawesome5}
+- \DeclareMathOperator{\arctanh}{arctanh}
+- \usepackage{subcaption}
+- \usepackage{amsfonts}
+- \usepackage{dsfont}
+- \usepackage{xspace}
+- \usepackage{enumitem}
+- \usepackage{pifont}
+- \usepackage{wrapfig}
+- \usepackage{textpos}
+- \usepackage{array}
+- \usepackage{multicol}
+
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+                        fig.path = "img/markdown-",
+                      cache = FALSE)
+options(enable_print_style = FALSE)
+```
+
+
+\begin{textblock*}{\textwidth}(0cm,-7.5cm)
+\begin{center}
+\includegraphics[height=2.5cm]{img/LOGO-ENSAE.png}
+\end{center}
+\end{textblock*}
+
+# Introduction
+
+Dans son ouvrage *Les vagues longues de la conjoncture*, Nikolai Kondratiev mettait en évidence l'existence de cycles économiques formés de deux périodes, une phase ascendante puis une phase descendante. Bien que contestée et complétée par la suite par d'autres analyses, cette découverte des cycles économiques a très vite mené les chercheurs a essayé de savoir dans quelle phase l'économie se trouvait et, de fait, savoir déterminer et prévoir le moment le cycle s'inverse est un enjeu majeur. C'est sur ce sujet que nous allons travaillé ici, à partir de l'article intitulé "Dating and forecasting turning points by Bayesian clustering with dynamic structure: a suggestion with an application to Austrian data. Journal of Applied Econometrics" \cite{Kaufmann}.
+
+# Cadre théorique
+
+# Applications
+
+# Discussion
+
+# Conclusion
+
+\newpage
+
+\nocite{*}
+\begin{thebibliography}{999}
+\bibitem[Sylvia Kaufmann (2010)]{Kaufmann} Kaufmann S. (2010). Dating and forecasting turning points by Bayesian clustering with dynamic structure: a suggestion with an application to Austrian data. Journal of Applied Econometrics, \textbf{25}(2): 309-344 
+\bibitem[Frühwirth-Schnatter S, Kaufmann S. (2008)]{FruhwirthKaufmann} Frühwirth-Schnatter S, Kaufmann S. (2008). Model-based clustering of multiple time series. Journal of Business and Economic Statistics \textbf{26}(1): 78
+\end{thebibliography}

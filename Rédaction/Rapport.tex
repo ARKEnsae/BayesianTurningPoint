@@ -1,0 +1,139 @@
+\documentclass[10pt,french,french]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+    \usepackage{xltxtra,xunicode}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+  \newcommand{\euro}{€}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=0.80in]{geometry}
+\ifxetex
+  \usepackage{polyglossia}
+  \setmainlanguage{}
+\else
+  \usepackage[shorthands=off,french]{babel}
+\fi
+\usepackage{longtable,booktabs}
+\ifxetex
+  \usepackage[setpagesize=false, % page size defined by xetex
+              unicode=false, % unicode breaks when used with xetex
+              xetex]{hyperref}
+\else
+  \usepackage[unicode=true]{hyperref}
+\fi
+\hypersetup{breaklinks=true,
+            bookmarks=true,
+            pdfauthor={},
+            pdftitle={},
+            colorlinks=true,
+            citecolor=blue,
+            urlcolor=blue,
+            linkcolor=magenta,
+            pdfborder={0 0 0}}
+\urlstyle{same}  % don't use monospace font for urls
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\setcounter{secnumdepth}{5}
+
+\providecommand{\tightlist}{%
+  %\setlength{\itemsep}{0pt}
+  \setlength{\parskip}{0pt}
+  }
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+
+  \title{~\textsc{statistique bayésienne}\\
+\hspace*{0.333em}Dating and forecasting turning point by Bayesian clustering with dynamic structure}
+    \author{Romain Lesauvage et Alain Quartier-la-Tente}
+    \date{}
+  
+\usepackage[T1]{fontenc}
+\usepackage{caption}
+\usepackage{graphicx}
+\usepackage{natbib}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{fontawesome5}
+\DeclareMathOperator{\arctanh}{arctanh}
+\usepackage{subcaption}
+\usepackage{amsfonts}
+\usepackage{dsfont}
+\usepackage{xspace}
+\usepackage{enumitem}
+\usepackage{pifont}
+\usepackage{wrapfig}
+\usepackage{textpos}
+\usepackage{array}
+\usepackage{multicol}
+
+
+\usepackage[tikz]{bclogo}
+\newcounter{comptEncadre}
+\renewcommand\thecomptEncadre{%\thesection.
+\arabic{comptEncadre}}
+\definecolor{processblue}{cmyk}{0.96,0,0,0}
+\newenvironment{encadre}[2][false]{\refstepcounter{comptEncadre}
+      %\addcontentsline{exp}{encadres}{\protect\numberline{\thecomptEncadre}#1}%
+\begin{bclogo}[couleur=processblue!5,arrondi=0.1,
+logo=\bcloupe,barre=none,couleurBord=blue!60!green,nobreak = #1]{ {\sc \textbf{Encadré \thecomptEncadre}} -  #2}
+\smallskip
+}{\end{bclogo}}
+
+\begin{document}
+
+\maketitle
+
+
+\begin{textblock*}{\textwidth}(0cm,-7.5cm)
+\begin{center}
+\includegraphics[height=2.5cm]{img/LOGO-ENSAE.png}
+\end{center}
+\end{textblock*}
+
+\hypertarget{introduction}{%
+\section{Introduction}\label{introduction}}
+
+Dans son ouvrage \emph{Les vagues longues de la conjoncture}, Nikolai Kondratiev mettait en évidence l'existence de cycles économiques formés de deux périodes, une phase ascendante puis une phase descendante. Bien que contestée et complétée par la suite par d'autres analyses, cette découverte des cycles économiques a très vite mené les chercheurs a essayé de savoir dans quelle phase l'économie se trouvait et, de fait, savoir déterminer et prévoir le moment le cycle s'inverse est un enjeu majeur. C'est sur ce sujet que nous allons travaillé ici, à partir de l'article intitulé ``Dating and forecasting turning points by Bayesian clustering with dynamic structure: a suggestion with an application to Austrian data. Journal of Applied Econometrics'' \cite{Kaufmann}.
+
+\hypertarget{cadre-thuxe9orique}{%
+\section{Cadre théorique}\label{cadre-thuxe9orique}}
+
+\hypertarget{applications}{%
+\section{Applications}\label{applications}}
+
+\hypertarget{discussion}{%
+\section{Discussion}\label{discussion}}
+
+\hypertarget{conclusion}{%
+\section{Conclusion}\label{conclusion}}
+
+\newpage
+
+\nocite{*}
+
+\begin{thebibliography}{999}
+\bibitem[Sylvia Kaufmann (2010)]{Kaufmann} Kaufmann S. (2010). Dating and forecasting turning points by Bayesian clustering with dynamic structure: a suggestion with an application to Austrian data. Journal of Applied Econometrics, \textbf{25}(2): 309-344 
+\bibitem[Frühwirth-Schnatter S, Kaufmann S. (2008)]{FruhwirthKaufmann} Frühwirth-Schnatter S, Kaufmann S. (2008). Model-based clustering of multiple time series. Journal of Business and Economic Statistics \textbf{26}(1): 78
+\end{thebibliography}
+
+\end{document}
