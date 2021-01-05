@@ -60,7 +60,42 @@ options(enable_print_style = FALSE)
 
 Dans son ouvrage *Les vagues longues de la conjoncture*, Nikolai Kondratiev mettait en évidence l'existence de cycles économiques formés de deux périodes, une phase ascendante puis une phase descendante. Bien que contestée et complétée par la suite par d'autres analyses, cette découverte des cycles économiques a très vite mené les chercheurs a essayé de savoir dans quelle phase l'économie se trouvait et, de fait, savoir déterminer et prévoir le moment le cycle s'inverse est un enjeu majeur. C'est sur ce sujet que nous allons travaillé ici, à partir de l'article intitulé "Dating and forecasting turning points by Bayesian clustering with dynamic structure: a suggestion with an application to Austrian data. Journal of Applied Econometrics" \cite{Kaufmann}.
 
+Ce papier poursuit un premier travail introduit par \cite{FruhwirthKaufmann}. L'idée est de travail sur un ensemble de plusieurs séries temporelles que l'on va essayer de regrouper. Nous chercherons à les regrouper au mieux afin d'étudier ensemble des séries qui possèdent la même dynamique. Nous travaillerons alors sur deux périodes, selon que l'on est inférieur ou supérieur à la moyenne de croissance et on cherchera à déterminer le point de retournement dans le cycle. 
+
+Dans ce travail, nous commencerons par détailler les spécifications théoriques du modèle et l'estimation bayésienne associée. Nous tenterons ensuite d'appliquer cette méthode à la manière de ce qui a été fait par \cite{Kaufmann} mais sur des données françaises.
+
+
 # Cadre théorique
+
+## Spécification du modèle
+
+Dans la suite, nous travaillerons avec des séries centrées, réduites et corrigées des variations saisonnières. Notons $y_{it}$ la série correspondant à un taux de croissance, avec $i \in \{1, \dots, N\}$ représentant les différentes séries à notre disposition et $t \in \{1, \dots, T\}$ représentant les différentes périodes d'études. Nous supposerons que nos séries suivent des processus autorégressifs, c'est-à-dire que l'on a 
+$$ y_{it} = \mu_{I_{it}}^{i} + \phi_1^i y_{i,t-1} + \dots + \phi_p y_{i,t-p} + \epsilon_{it}$$
+avec $\epsilon_{it} \sim \mathcal{N}\big(0, \displaystyle\frac{\sigma}{\lambda_i^2}\big)$. L'indice $I_{it}$ précisera à quel moment du cycle nous nous trouverons, ainsi on aura $I_{it} \in \{1,2\}$.
+
+Théoriquement, les séries étudiées sont supposées être indépendantes les unes des autres. En pratique, cependant, il existe des séries qui suivent des chemins proches et on peut donc vouloir exploiter cette information pour notre estimation. On va donc chercher à créer des groupes de séries de manière intelligente. Dans ce but, on va donc introduire une indicatrice d'appartenance à un groupe que l'on va note $S_i \in \{1, \dots, K \}$. Nous allons donc dans la suite supposé que pour les séries appartenant à un même groupe, nous allons avoir des paramètres distribués au sein d'une moyenne et ajouter un paramètre d'hétérogénéité, tel que :
+
+$$ \mu_{I_{S_i,t}}^i \sim \begin{cases}
+\mathcal{N}(\mu_1^k,q_1^k) \text{ si } S_i = k \text{ et } I_{kt} = 1\\
+\mathcal{N}(\mu_2^k,q_2^k) \text{ si } S_i = k \text{ et } I_{kt} = 2
+\end{cases} $$
+$$ (\phi_1^i, \dots, \phi_p^i) \sim \mathcal{N}(\phi^k,Q_{\phi}^k) \text{ si } S_i = k$$
+Pour la suite, nous définirons la période 1 comme celle où l'on se trouve en-dessous de la croissance moyenne et la période 2 comme celle où l'on se trouve au-dessus. Nous ferons également l'hypothèse que $I_{kt}$ suit un processus de Markov, c'est-à-dire $\mathbb{P}(I_{k,t} = j | I_{k,t-1} = j) = \xi_{j,l}^k$ avec $j,l \in \{1,2\}$. Par propriété sur les chaînes de Markov, on sait donc que $\forall j \in \{1,2\}, \sum\limits_{l=1}^2 \xi_{j,l}^k = 1$. Cette spécification permet de repérer en temps réel les points où le cycle change de période. 
+
+Il faut également proposer une spécification pour la variable $S_i$, nous supposerons qu'elle suit un modèle logit multinomilal, c'est-à-dire $\mathbb{P}(S_i = k |\gamma_1, \dots, \gamma_K, \gamma_{z,1}, \dots, \gamma_{z,K-1}) = \displaystyle\frac{\exp(\gamma_k + Z_k\gamma_{z,k})}{1 + \sum\limits_{l=1}^{K-1} \exp(\gamma_l + Z_l\gamma_{z,l})}$ où l'on prendra le groupe K comme référence ($\gamma_K = \gamma_{z,K}=0$), $Z_i$ est un vecteur permettant de repérer l'appartenance à un groupe et les paramètres $\gamma$ sont inconnus mais spécifiques aux groupes. 
+
+Enfin, il reste à ajouter une spécification pour en compte la dynamique du cycle. Pour cela, on va supposer avoir deux groupes pour la suite de l'analyse. Les séries telles que $S_i = 2$ seront les séries qui mènent le cycle, tandis que les séries pour lesquelles $S_i = 1$ seront les séries qui coïncident avec le cycle. On va donc définir une nouvelle variable $I^*$.
+
+$$\begin{cases}
+I^* = 1 := (I_{1t}=1,I_{2t}=1) \\
+I^* = 2 := (I_{1t}=1,I_{2t}=2) \\
+I^* = 3 := (I_{1t}=2,I_{2t}=1) \\
+I^* = 4 := (I_{1t}=2,I_{2t}=2) 
+\end{cases}$$
+
+## Estimation bayésienne
+
+
 
 # Applications
 
