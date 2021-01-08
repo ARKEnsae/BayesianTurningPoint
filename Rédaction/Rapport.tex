@@ -140,7 +140,7 @@ Pour la suite, nous définirons la période 1 comme celle où l'on se trouve en-
 
 Il faut également proposer une spécification pour la variable \(S_i\), nous supposerons qu'elle suit un modèle logit multinomilal, c'est-à-dire \(\mathbb{P}(S_i = k |\gamma_1, \dots, \gamma_K, \gamma_{z,1}, \dots, \gamma_{z,K-1}) = \displaystyle\frac{\exp(\gamma_k + Z_k\gamma_{z,k})}{1 + \sum\limits_{l=1}^{K-1} \exp(\gamma_l + Z_l\gamma_{z,l})}\) où l'on prendra le groupe K comme référence (\(\gamma_K = \gamma_{z,K}=0\)), \(Z_i\) est un vecteur permettant de repérer l'appartenance à un groupe et les paramètres \(\gamma\) sont inconnus mais spécifiques aux groupes.
 
-Enfin, il reste à ajouter une spécification pour en compte la dynamique du cycle. Pour cela, on va supposer avoir deux groupes pour la suite de l'analyse. Les séries telles que \(S_i = 2\) seront les séries qui mènent le cycle, tandis que les séries pour lesquelles \(S_i = 1\) seront les séries qui coïncident avec le cycle. On va donc définir une nouvelle variable \(I^*\).
+Enfin, il reste à ajouter une spécification pour en compte la dynamique du cycle. Pour cela, on va supposer avoir deux groupes spécifiques pour la suite de l'analyse et \(K-2\) groupes indépendants. Les séries telles que \(S_i = 2\) seront les séries qui mènent le cycle, tandis que les séries pour lesquelles \(S_i = 1\) seront les séries qui coïncident avec le cycle. On va donc définir une nouvelle variable \(I^*\).
 
 \[\begin{cases}
 I^* = 1 := (I_{1t}=1,I_{2t}=1) \\
@@ -149,8 +149,25 @@ I^* = 3 := (I_{1t}=2,I_{2t}=1) \\
 I^* = 4 := (I_{1t}=2,I_{2t}=2) 
 \end{cases}\]
 
+En cas d'incertitude sur la structure dynamique des nos séries, c'est-à-dire sur l'identification des groupes 1 et 2, on peut introduire un paramètre de structure \(\rho^*\), caractérisant la structure entre les groupes. Il sera donc la réalisation d'une des \(K(K-1)\) permutations de \(\{1,2,0_{K-2}\}\). On considéra que \(\rho^*=1\) pour le groupe des séries coïncidentes, \(\rho^*=2\) pour celles qui mènent le cycle, et toute autre valeur renverra aux séries aux comportements autonomes.
+
 \hypertarget{estimation-bayuxe9sienne}{%
 \subsection{Estimation bayésienne}\label{estimation-bayuxe9sienne}}
+
+\hypertarget{notations}{%
+\subsubsection{Notations}\label{notations}}
+
+Dans la suite, on va noter \(\forall i \in \{1,\dots,N\}, y_i^t = \{y_{i,t},y_{i,t-1},\dots,y_{i,1}\}, Y_t = \{y_{1,t}, \dots, y_{N,t} \} \text{ et } Y^t = \{Y_t, \dots, Y_1\}\). De même, on notera \(S^N = \{S_1, \dots, S_N\}\) l'ensemble des indicatrices d'appartenances aux groupes, \(I^T = \{I_1^T, \dots, I_K^T\}\) où \(I_k^T=\{I_{k,T}, \dots, I_{k,1}\}\) les indicatrices d'états. Enfin, on notera \(\lambda^N = \{\lambda_1, \dots, \lambda_N\}\) qui regroupe les poids qui seront utilisés.
+
+Par commodité, on notera également \(\theta=(\mu_1^1, \mu_2^1, \dots, \mu_1^K, \mu_2^K, \phi^1, \dots, \phi^K, Q^1, \dots, Q^K, \sigma^2, \xi^*, \xi^{\rho^*(k)=0},\gamma, \gamma_z)\) où \(Q^k = \begin{pmatrix} q_1^k & 0 & 0 \\ 0 & q_2^k & 0 \\ 0 & 0 & Q_{\phi}^k \end{pmatrix}\) représente l'hétérogénéité intra-groupe, \(\xi^{\rho^*(k)=0} = \{\xi_{11}^k,\xi_{12}^k,\xi_{21}^k,\xi_{22}^k\}\), \(\gamma = (\gamma_1, \dots, \gamma_{K-1})\) et \(\gamma_z = (\gamma_{z,1},\dots, \gamma_{z,K-1})\).
+
+Nous pouvons passons à l'estimation par MCMC pour obtenir une posteriori sur le paramètre \(\psi = (\theta,S^N,I^T,\lambda^N,\rho^*)\).
+
+\hypertarget{estimation-par-mcmc}{%
+\subsubsection{Estimation par MCMC}\label{estimation-par-mcmc}}
+
+Nous partons de \(\pi(\psi|Y^T) \propto L(Y^T|\psi)\pi(\psi)\) où \((L(Y^T|\psi)\) est la vraisemblance, que l'on peut réécrire.
+En effet, \(L(Y^T|\psi) = \prod\limits_{t=p+1}^T\prod\limits_{i=1}^Nf(y_{i,t}|y_i^{t-1},\mu_{I_{S_i,t}}^{S_i},\phi^{S_i},Q^{S_i},\lambda_i,\sigma^2)\), avec \[f(y_{i,t}|y_i^{t-1},\mu_{I_{S_i,t}}^{S_i},\phi^{S_i},Q^{S_i},\lambda_i,\sigma^2)=\displaystyle\frac{1}{\sqrt{2\pi\nu_{it}^{S_i}}}\exp\big( -\displaystyle\frac{1}{2\nu_{it}^{S_i}}\big(y_{it} - \mu_{I_{S_i,t}}^{S_i} - \sum\limits_{j=1}^p \phi_j^{S_i}y_{i,t-1} \big)^2\big)\]
 
 \hypertarget{applications}{%
 \section{Applications}\label{applications}}
