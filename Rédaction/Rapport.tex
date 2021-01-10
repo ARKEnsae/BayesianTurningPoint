@@ -169,8 +169,32 @@ Nous pouvons passons à l'estimation par MCMC pour obtenir une posteriori sur le
 Nous partons de \(\pi(\psi|Y^T) \propto L(Y^T|\psi)\pi(\psi)\) où \((L(Y^T|\psi)\) est la vraisemblance, que l'on peut réécrire.
 En effet, \(L(Y^T|\psi) = \prod\limits_{t=p+1}^T\prod\limits_{i=1}^Nf(y_{i,t}|y_i^{t-1},\mu_{I_{S_i,t}}^{S_i},\phi^{S_i},Q^{S_i},\lambda_i,\sigma^2)\), avec \[f(y_{i,t}|y_i^{t-1},\mu_{I_{S_i,t}}^{S_i},\phi^{S_i},Q^{S_i},\lambda_i,\sigma^2)=\displaystyle\frac{1}{\sqrt{2\pi\nu_{it}^{S_i}}}\exp\big( -\displaystyle\frac{1}{2\nu_{it}^{S_i}}\big(y_{it} - \mu_{I_{S_i,t}}^{S_i} - \sum\limits_{j=1}^p \phi_j^{S_i}y_{i,t-1} \big)^2\big)\]
 
+Nous supposerons dans la suite que la structure \(\rho^*\) est connue (déterminée par d'autres méthodes), on peut alors réécrire la distribution a priori sur \(\phi\) ainsi :
+
+\[\pi(\phi) = \pi(I^{*T}|\rho^*, \xi^*) \prod \limits_{\rho^*(k)=0} \pi(I^{T}_k|\rho^*,\xi^*)\pi(S^N|\gamma, \gamma_z,Z^N)\pi(\lambda^N)\pi(\theta)\]
+
+où les densités \(\pi(I^{*T}|\rho^*, \xi^*)\),\(\pi(I^{T}_k|\rho^*,\xi^*)\) et \(\pi(S^N|\gamma, \gamma_z,Z^N)\) sont connues. On supposera que les poids (\(\lambda^N\)) sont indépendants et suivent une loi de Gamma. Il reste à spécifier l'a priori sur \(\pi(\theta)\) : pour cela, nous décomposons \(\theta\) en blocs sur lesquels nous faisons des a priori standards.
+
+Nous cherchons ensuite à générer à partir de la loi a posteriori \(\pi(\phi|Y^T)\), en se basant sur le procédé détaillé dans \cite{FruhwirthKaufmann}. Nous pouvons raisonner en 4 étapes différentes :
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \(\pi(S^N|Y^T, I^T, \rho^*, \lambda^N, \theta)\)
+\item
+  \(\pi(I^T|Y^T, S^N, \rho^*, \lambda^N, \theta)\)
+\item
+  \(\pi(\lambda^N|Y^T, I^T, S^N, \theta)\)
+\item
+  \(\pi(\theta|Y^T,S^N,I^T)\)
+\end{enumerate}
+
+Dans la première étape, nous générerons les indicatrices de groupes pour chaque série puis, à partir de \(\rho^*\), on obtient une réalisation pour l'indicatrice d'état de l'étape 2. Dans l'étape 4, toutes les distributions a posteriori sont conjugées aux a priori, sauf pour \(\gamma\) et \(\gamma_z\), nous utiliserons alors l'aglorithme de Metropolis-Hastings pour générer selon leur loi.
+
 \hypertarget{applications}{%
 \section{Applications}\label{applications}}
+
+L'article \cite{Kaufmann} a utilisé la spécification théorique présentée dans la partie précédente sur des données autrichiennes. Nous avons décidé dans le cadre de ce travail d'appliquer cela sur des données françaises. Nous avons donc récupéré un certain nombre de données liées au PIB ou aux enquêtes conjonctures, dont le détail est expliqué dans le tableau XX.
 
 \hypertarget{discussion}{%
 \section{Discussion}\label{discussion}}
