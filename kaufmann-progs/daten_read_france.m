@@ -7,7 +7,7 @@ ser=ser(1,2:end); % string array of data series
 if ~strcmp(file,'uni');
     %PDS
     if strcmp(file,'logit');
-        ser_excl={'HICP-IG';'HICP'}; %string of series to exclude
+        ser_excl={'HICP-IG';'HICP';'ser-tot-dem'}; %string of series to exclude
         ser_sel = ser(find(1-sum(strcmp(ser(ones(size(ser_excl,1),1),:),ser_excl(:,ones(1,size(ser,2)))),1))); % string array of included series
         ser_ind=find(1-sum(strcmp(ser(ones(size(ser_excl,1),1),:),ser_excl(:,ones(1,size(ser,2)))),1)); %choose which countries to include, index array
         if preclas
@@ -23,7 +23,7 @@ if ~strcmp(file,'uni');
         end
         %PP
     elseif strcmp(file,'pp');
-        ser_excl={'HICP-IG';'HICP'};
+        ser_excl={'HICP-IG';'HICP';'ser-tot-dem'};
         ser_sel = ser(find(1-sum(strcmp(ser(ones(size(ser_excl,1),1),:),ser_excl(:,ones(1,size(ser,2)))),1))); % string array of included series
         ser_ind=find(1-sum(strcmp(ser(ones(size(ser_excl,1),1),:),ser_excl(:,ones(1,size(ser,2)))),1)); %choose which countries to include, index array
         ser_cont=[];%{'YER';'PCR';'ITR';'MTR';'XTR'}; %series falling into the contemporaneous group
@@ -32,7 +32,7 @@ if ~strcmp(file,'uni');
         ind_lead=[];
         %BDS
     elseif strcmp(file,'bds');
-        ser_excl={'HICP-IG';'HICP'};
+        ser_excl={'HICP-IG';'HICP';'ser-tot-dem'};
         ser_sel = ser(find(1-sum(strcmp(ser(ones(size(ser_excl,1),1),:),ser_excl(:,ones(1,size(ser,2)))),1))); % string array of included series
         ser_ind=find(1-sum(strcmp(ser(ones(size(ser_excl,1),1),:),ser_excl(:,ones(1,size(ser,2)))),1)); %choose which countries to include, index array
         ser_cont={'YER'};%'PCR';'ITR';'MTR';'XTR'}; %series falling into the contemporaneous group
@@ -49,7 +49,7 @@ if ~strcmp(file,'uni');
     ind_levex=ones(1,size(ser,2))==1;
 
 elseif strcmp(file,'uni') % Supprimer surement
-    ser_excl={'HICP-IG';'HICP'};
+    ser_excl={'HICP-IG';'HICP';'ser-tot-dem'};
     ser_sel = ser(find(1-sum(strcmp(ser(ones(size(ser_excl,1),1),:),ser_excl(:,ones(1,size(ser,2)))),1))); % string array of included series
     ser_ind=find(1-sum(strcmp(ser(ones(size(ser_excl,1),1),:),ser_excl(:,ones(1,size(ser,2)))),1)); %choose which countries to include, index array
     ser_cont={'YER'};%series falling into the contemporaneous group
