@@ -1,11 +1,12 @@
 % einlesen aller daten
-if cal_end==2006;
-    daten_read_cont0703;
-elseif cal_end==2005;
-    daten_read_cont0604;
-elseif cal_end==2003;
-    daten_read_cont0410;
-end
+%if cal_end==2006;
+%    daten_read_cont0703;
+%elseif cal_end==2005;
+%    daten_read_cont0604;
+%elseif cal_end==2003;
+%    daten_read_cont0410;
+%end
+daten_read_france
 % daten_read_test;
 %  K=2;
 
