@@ -11,9 +11,9 @@ File='logit';
 DSTruc=0;
 S_Logit=1;
 Pclas=1;
-for cal_beg=[1988];
+for cal_beg=[2001];
     cal_end=cal_beg+span;
-    for cal_end_Est=[2006.75];
+    for cal_end_Est=[2018.75];
     for K=[3];
         for lag_dlo=[2]; ['lag=' int2str(lag_dlo)] %lag endogenous variable
             lag_dir=0; %lag exogenous variable

@@ -39,9 +39,9 @@ true=0; %flag to start with true values of I_t and of parameters (if 1), to star
 span=18; %=18 working with dataset ending in 2006, =15 working with dataset ending in 2003
 maxlag=4; %maximum endogenous or exogenous variables
 
-for cal_beg=[1988];
+for cal_beg=[2001];
     cal_end=cal_beg+span;
-    for cal_end_est=2006.75;%[2000.00:0.25:2006.75]; % use the second range for out-of-sample forecasting exercise
+    for cal_end_est=2018.75;%[2000.00:0.25:2006.75]; % use the second range for out-of-sample forecasting exercise
     for K=[3];['K=' int2str(K)] %number of groups
         for lag_dlo=[2]; ['lag=' int2str(lag_dlo)] %lag endogenous variable
             lag_dir=0; %lag exogenous variable
