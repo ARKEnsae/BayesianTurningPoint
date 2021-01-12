@@ -1,4 +1,5 @@
 
+%A supprimer
 % [data ser]=xlsread('DAT_roh_Q0410.xls'); %
 [data ser]=xlsread('DAT_roh_Q0604.xls'); % data partially available till 2006Q1
 % the first line, 1987Q4 contains an indicator which relates to a specific class of series (see printout)
@@ -155,9 +156,9 @@ end
 
 % Zbasis=zeros(nobs,[],nbank);
 % Zbasis(:,1,:)=reshape(lenddata_b(:,9),nobs,nbank)*100; % zinssatz dir
-% Zbasis(:,2,:)=reshape(lenddata_b(:,3),nobs,nbank); %Grösse si
+% Zbasis(:,2,:)=reshape(lenddata_b(:,3),nobs,nbank); %Gr?sse si
 
-% Zdum=zeros(nobs,4,nbank);%dummies 1-3: saisonals 4: structural break in der liquidität ab 4.quartal 1995 
+% Zdum=zeros(nobs,4,nbank);%dummies 1-3: saisonals 4: structural break in der liquidit?t ab 4.quartal 1995 
 % for i1=1:4;
 %    Zdum(:,i1,:)=reshape(lenddata_b(:,4+i1),nobs,nbank); 
 % end;clear i1;   
