@@ -12,7 +12,7 @@ if ~strcmp(file,'uni');
         ser_ind=find(1-sum(strcmp(ser(ones(size(ser_excl,1),1),:),ser_excl(:,ones(1,size(ser,2)))),1)); %choose which countries to include, index array
         if preclas
             ser_cont={'YER';'MTR';'PCR';'ITR';'XTR';'ser-tot-capa';'ind-manuf-tppa';'ind-manuf-ossk';'bat-tot-apa';'bat-tot-epa';'bat-tot-tuc';'HICP-FO';'HICP-E';'CLIMAT-FR';'IPI-CZ'}; %series falling into the contemporaneous group
-            ser_lead={'ser-tot-capre';'ser-tot-dem';'ind-manuf-pgp';'ind-manuf-tppre';'ind-manuf-oscde';'ind-manuf-oscd';'bat-tot-apr';'bat-tot-jcc'}; %series falling into the leading group
+            ser_lead={'ser-tot-capre';'ser-tot-dem';'ind-manuf-pgp';'ind-manuf-tppre';'ind-manuf-oscde';'KTAUF';'bat-tot-apr';'bat-tot-jcc'}; %series falling into the leading group
             ind_cont=find(sum(strcmp(ser_sel(ones(size(ser_cont,1),1),:),ser_cont(:,ones(1,size(ser_sel,2)))),1)); %index of included series defining the contemporaneous group
             ind_lead=find(sum(strcmp(ser_sel(ones(size(ser_lead,1),1),:),ser_lead(:,ones(1,size(ser_sel,2)))),1)); %index of included series defining the leading group
         elseif ~preclas
@@ -44,7 +44,7 @@ if ~strcmp(file,'uni');
     ser_diff={}; %series falling into the contemporaneous group
     ser_lev={'HICP-IG';'HICP';'YER';'MTR';'PCR';'ITR';'XTR';'ser-tot-capa';'ind-manuf-tppa';'ind-manuf-ossk';'bat-tot-apa';'bat-tot-epa';...
         'bat-tot-tuc';'HICP-FO';'HICP-E';'CLIMAT-FR';'IPI-CZ';...
-        'ser-tot-capre';'ser-tot-dem';'ind-manuf-pgp';'ind-manuf-tppre';'ind-manuf-oscde';'ind-manuf-oscd';'bat-tot-apr';'bat-tot-jcc'};
+        'ser-tot-capre';'ser-tot-dem';'ind-manuf-pgp';'ind-manuf-tppre';'ind-manuf-oscde';'KTAUF';'bat-tot-apr';'bat-tot-jcc'};
     ind_lev=[];
     ind_levex=ones(1,size(ser,2))==1;
 
@@ -135,7 +135,7 @@ if sg_change
     %dlo_unadj=dlo_unadj.*sg(ones(nobs,1),:);
     %data_raw=data_raw.*sg(ones(size(data_raw,1),1),:);
     if K>1
-    [sg] = neg_corr_sign(dlo,ser_sel,{'ind-manuf-oscd'}); %change sign for series significantly negatively correlated with KTAUF
+    [sg] = neg_corr_sign(dlo,ser_sel,{'KTAUF'}); %change sign for series significantly negatively correlated with KTAUF
     %dlo=dlo.*sg(ones(nobs,1),:);%Commentaires AQLT
     %dlo_obs=dlo_obs.*sg(ones(nobs,1),:);
     %dlo_unadj=dlo_unadj.*sg(ones(nobs,1),:);
@@ -146,7 +146,7 @@ end
 if S_logit
     corr_c={'YER'}; %correlation with GDP
     c_ind=find(sum(strcmp(ser_sel(ones(size(corr_c,1),1),:),corr_c(:,ones(1,size(ser_sel,2)))),1));
-    corr_l={'ind-manuf-oscd'}; %correlation with orders
+    corr_l={'KTAUF'}; %correlation with orders
     l_ind=find(sum(strcmp(ser_sel(ones(size(corr_l,1),1),:),corr_l(:,ones(1,size(ser_sel,2)))),1));
     [R P]=corrcoef(dlo);
     Zlogit=[R(c_ind,:)' R(l_ind,:)'];
