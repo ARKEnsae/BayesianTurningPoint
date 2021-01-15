@@ -1,10 +1,8 @@
 % einlesen aller daten
 %if cal_end==2006;
-%    daten_read_cont0703;
+%daten_read_france
 %elseif cal_end==2005;
-%    daten_read_cont0604;
-%elseif cal_end==2003;
-%    daten_read_cont0410;
+%daten_read_france1994
 %end
 daten_read_france
 % daten_read_test;
@@ -68,8 +66,8 @@ end
 
 
 indexb=index(~iout);%Auswahl der units 
-% indexn=[(1+lag_y):nobs]';%Berücksichtigen von autokorrelation in y
-indexn=[(1+maxlag):nobs]';%Berücksichtigen von autokorrelation in y oder von verzögerten endogenen variablen
+% indexn=[(1+lag_y):nobs]';%Ber?cksichtigen von autokorrelation in y
+indexn=[(1+maxlag):nobs]';%Ber?cksichtigen von autokorrelation in y oder von verz?gerten endogenen variablen
 
 
 y=dlo(indexn,indexb);
@@ -103,7 +101,7 @@ Z=cat(2,Zvar);
 if lag_dlo>0
     ill=size(Zvar,2); %gibt die letzte der spalten von Z an, in denen sich die gruppenspezifischen effekte befinden
     isp_lag_dlo=[2:ill];  
-    %gibt an in welchen spalten von Z sich die zeitverzögerten Variablen befinden
+    %gibt an in welchen spalten von Z sich die zeitverz?gerten Variablen befinden
 else
     ill=size(Zvar,2);
     isp_lag_dlo=[];
@@ -122,7 +120,7 @@ else
     Zlogit=[];
 end    
 
-% ZMS enthält jene spalten von Z, deren Parameter sich nach einem M_S_modell ändern können
+% ZMS enth?lt jene spalten von Z, deren Parameter sich nach einem M_S_modell ?ndern k?nnen
 
 if not_switch
     ill_sw=[];

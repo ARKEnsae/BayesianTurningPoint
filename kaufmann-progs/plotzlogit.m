@@ -44,13 +44,13 @@ for j=1:MC
     prob_prior_pp(:,:,j)=exp(Z_logit_pp*permute(gammc(j,:,:),[2 3 1]))./kron(ones(1,K),sum(exp(Z_logit_pp*permute(gammc(j,:,:),[2 3 1])),2));
 %    prob_post(:,:,j)=exp(Zlogit*permute(gammc(j,:,:),[2 3 1]))./kron(ones(1,K),sum(exp(Zlogit*permute(gammc(j,:,:),[2 3 1])),2));
 end
-[Zlogit_KTAUF,Zind_KTAUF]=sort(Zlogit(:,3));
+[Zlogit_manuf-oscd,Zind_manuf-oscd]=sort(Zlogit(:,3));
 figure(double(gcf)+1)
 subplot(2,1,1)
 plot(Z_logit_pp(:,3),mean(prob_prior_pp(:,2,:),3))
-title('P(S_i=2)|\cdot, depending on corr with KTAUF')
+title('P(S_i=2)|\cdot, depending on corr with manuf-oscd')
 subplot(2,1,2)
-bar(1:N,mean(prob_post(Zind_KTAUF,2,:),3),0.1)
+bar(1:N,mean(prob_post(Zind_manuf-oscd,2,:),3),0.1)
 
 [Z1,Z2]=meshgrid(-1.0:0.1:1.0);
 P1p=0;P2p=0;
@@ -69,12 +69,12 @@ P2p=P2p./MC;
 % subplot(1,2,1)
 % mesh(Z1,Z2,P1p);
 % xlabel('corr with GDP')
-% ylabel('corr with KTAUF')
+% ylabel('corr with manuf-oscd')
 % zlabel('P(S_i=1|Z_i)')
 % subplot(1,2,2)
 % mesh(Z1,Z2,P2p);
 % xlabel('corr with GDP')
-% ylabel('corr with KTAUF')
+% ylabel('corr with manuf-oscd')
 % zlabel('P(S_i=2|Z_i)')
 
 figure(double(gcf)+1)
@@ -82,7 +82,7 @@ figure(double(gcf)+1)
 %plot3(Z1,Z2,P1p);
 mesh(Z1,Z2,P1p);
 xlabel('corr with GDP')
-ylabel('corr with KTAUF')
+ylabel('corr with manuf-oscd')
 zlabel('P(S_i=1|Z_i)')
 hold on
 %plot3(Zlogit_GDP,Zlogit(Zind_GDP,3),mean(prob_post(Zind_GDP,2,:),3),'.','MarkerSize',15)
@@ -100,7 +100,7 @@ figure(double(gcf)+1)
 %plot3(Z1,Z2,P2p);
 mesh(Z1,Z2,P2p);
 xlabel('corr with GDP')
-ylabel('corr with KTAUF')
+ylabel('corr with manuf-oscd')
 zlabel('P(S_i=2|Z_i)')
 hold on
 %plot3(Zlogit_GDP,Zlogit(Zind_GDP,3),mean(prob_post(Zind_GDP,2,:),3),'.','MarkerSize',15)

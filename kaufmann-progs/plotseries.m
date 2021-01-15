@@ -29,7 +29,7 @@ ctry=ser_sel;
 % ctry=ctry(1,2:end);
 % cat_dum=data(1,:);
 % data=data(2:end,:);
-% ctries_sel={'SZR';'QTAUF';'QTEXPA';'QTLAG';'QTPR';'QTPRO';'QTBAUF';'QTBPR';'QTBBGL';'QTBAGL';'INDSEN';'KTPROL';'KTAUF';'KTAUSL';...
+% ctries_sel={'SZR';'QTAUF';'QTEXPA';'QTLAG';'QTPR';'QTPRO';'QTBAUF';'QTBPR';'QTBBGL';'QTBAGL';'INDSEN';'KTPROL';'manuf-oscd';'KTAUSL';...
 %             'KTLAG';'KTPRON';'KTVPN';'BAUVPN';'EINDSE';'EBAUSE';'EHANSE';'EKONSE';'ALQN';'ALQNSA';'STI';'SEKMRE';'YIELD'};
 % % data=log(data);
 % % y_gr=(data(2:end,:)-data(1:end-1,:))*100;

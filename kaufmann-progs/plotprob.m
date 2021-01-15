@@ -43,7 +43,7 @@ if S_logit
         if j==1
             xlabel('corr with GDP')
         elseif j==2
-            xlabel('corr with KTAUF')
+            xlabel('corr with manuf-oscd')
         end
     end
 end

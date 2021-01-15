@@ -5,7 +5,7 @@ rand('state',999);
 
 freq=4; %observation frequency
 Ni=1; %number of years to forecast
-ser_fc={'YER';'KTAUF'}%;'PCR';'ITR';'MTR';'XTR'}; %for which series do you want a forecast
+ser_fc={'YER';'manuf-oscd'}%;'PCR';'ITR';'MTR';'XTR'}; %for which series do you want a forecast
 end_for=1; %flag to compute out-of-sample probabilistic forecasts at the end of the observation period
 
 

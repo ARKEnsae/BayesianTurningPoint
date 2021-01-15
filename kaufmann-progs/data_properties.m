@@ -21,7 +21,7 @@ conc_mat=zeros(maxlead+1,N-1,1);
 
 corr_c={'YER'};
 c_ind=find(sum(strcmp(ctry(ones(size(corr_c,1),1),:),corr_c(:,ones(1,size(ctry,2)))),1));
-corr_l={'KTAUF'};
+corr_l={'manuf-oscd'};
 l_ind=find(sum(strcmp(ctry(ones(size(corr_l,1),1),:),corr_l(:,ones(1,size(ctry,2)))),1));
 
 
@@ -85,7 +85,7 @@ gh=figure(double(gcf)+1)
 scatter(R(c_ind,or(P(c_ind,:)<0.05,P(l_ind,:)<0.05)),R(l_ind,or(P(c_ind,:)<0.05,P(l_ind,:)<0.05)),'o');
 set(gca,'FontSize',16)
 xlabel('with GDP','FontSize',ax_fnt)
-ylabel('with KTAUF','FontSize',lab_fnt)
+ylabel('with manuf-oscd','FontSize',lab_fnt)
 print(gh,'-deps',['dat_corr']);
 
 
@@ -94,7 +94,7 @@ t=['\\begin{table}\\caption{Data properties}\\label{tab:prop}\\begin{center}\\be
         '*{' int2str(8) '}{c}|} \\hline \\hline \n'];
 fprintf(fid,t);
 
-t=['series& mean& mean & mean & stand.dev.& GDP & P-value & KTAUF & P-value \\\\  \n'];
+t=['series& mean& mean & mean & stand.dev.& GDP & P-value & manuf-oscd & P-value \\\\  \n'];
 fprintf(fid,t);
 t=['& & above av.& below av.& & & & & \\\\ \\hline  \n'];
 fprintf(fid,t);

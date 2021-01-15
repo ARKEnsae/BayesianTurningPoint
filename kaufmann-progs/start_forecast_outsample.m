@@ -5,7 +5,7 @@ rand('state',999);
 
 freq=4; %observation frequency
 Ni=1; %number of years to forecast
-ser_fc={'YER';'KTAUF'}%;'PCR'yx;'ITR';'MTR';'XTR'}; %for which series do you want a forecast
+ser_fc={'YER';'manuf-oscd'}%;'PCR'yx;'ITR';'MTR';'XTR'}; %for which series do you want a forecast
 
 
 fully_b=1; %flag to obtain fully Bayesian forecasts (taking into account estimation and parameter uncertainty)

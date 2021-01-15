@@ -67,7 +67,7 @@ pp(end+1:end+c_adj)=0/0;
 bds(end+1:end+c_adj)=0/0;
 uni(end+1:end+c_adj)=0/0;
 
-% t=['forecast date; YER and KTAUF growth; prob_fore (2); prob_insample(2); in-sample comparison(2); versus ECRI(1) ; versus PDS(1) \n'];
+% t=['forecast date; YER and manuf-oscd growth; prob_fore (2); prob_insample(2); in-sample comparison(2); versus ECRI(1) ; versus PDS(1) \n'];
 t=['forecast date; prob_fore (1); prob_insample(1); in-sample comparison(1); versus ECRI(1) ; ECRI; versus PDS(1) ;PDS ; versus PDS(1) ;PDS\n'];
 
 fprintf(fid,t);
