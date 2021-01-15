@@ -1,12 +1,13 @@
 % einlesen aller daten
-if cal_end==2006;
-    daten_read_cont0703;
-elseif cal_end==2005;
-    daten_read_cont0604;
-elseif cal_end==2003;
-    daten_read_cont0410;
-end
+%if cal_end==2006;
+%    daten_read_cont0703;
+%elseif cal_end==2005;
+%    daten_read_cont0604;
+%elseif cal_end==2003;
+%    daten_read_cont0410;
+%end
 % daten_read_test;
+daten_read_france
 %  K=2;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -101,7 +102,7 @@ Z=cat(2,Zvar);
 if lag_dlo>0
     ill=size(Zvar,2); %gibt die letzte der spalten von Z an, in denen sich die gruppenspezifischen effekte befinden
     isp_lag_dlo=[2:ill];  
-    %gibt an in welchen spalten von Z sich die zeitverzögerten Variablen befinden
+    %gibt an in welchen spalten von Z sich die zeitverz?gerten Variablen befinden
 else
     ill=size(Zvar,2);
     isp_lag_dlo=[];
@@ -120,7 +121,7 @@ else
     Zlogit=[];
 end    
 
-% ZMS enthält jene spalten von Z, deren Parameter sich nach einem M_S_modell ändern können
+% ZMS enth?lt jene spalten von Z, deren Parameter sich nach einem M_S_modell ?ndern k?nnen
 
 if not_switch
     ill_sw=[];

@@ -7,7 +7,7 @@ sg_change=1;
 S_logit=0;
 K=3;
 
-daten_read_cont0703
+daten_read_france
 
 ctry=ser_sel;
 % % [data ctry]=xlsread('DAT_roh_Q0604.xls'); %
