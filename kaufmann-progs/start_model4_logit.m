@@ -19,7 +19,7 @@ S_logit=1;% also set bas_cat and var_logit!; flag to predict the group indictaor
 DStruc=0; %flag to estimate the dynamic structure in the panel -- if DStruc=1 then use pool=1, S_logit=0 in that case;
 bas_cat=[3]; % set baseline group (no dependence on covariates) for logit prior
 var_logit=[3];
-%var_logit=3; % zur zeit verlässlichste variante
+%var_logit=3; % zur zeit verl?sslichste variante
 %var_logit=2;
 %var_logit=3;
 %var_logit=4;
@@ -39,9 +39,9 @@ true=0; %flag to start with true values of I_t and of parameters (if 1), to star
 span=18; %=18 working with dataset ending in 2006, =15 working with dataset ending in 2003
 maxlag=4; %maximum endogenous or exogenous variables
 
-for cal_beg=[2001];
+for cal_beg=[date_deb];
     cal_end=cal_beg+span;
-    for cal_end_est=2018.75;%[2000.00:0.25:2006.75]; % use the second range for out-of-sample forecasting exercise
+    for cal_end_est=2020.75;%[2000.00:0.25:2006.75]; % use the second range for out-of-sample forecasting exercise
     for K=[3];['K=' int2str(K)] %number of groups
         for lag_dlo=[2]; ['lag=' int2str(lag_dlo)] %lag endogenous variable
             lag_dir=0; %lag exogenous variable
@@ -51,7 +51,7 @@ for cal_beg=[2001];
             
             prm=[-0.25;0.25]; %mean of group-specific parameter if I_t==0 (recession), I_t==1 (boom) ;
             prm_end=0;  %mean for autocorrelation and other group-specific variables
-            scale=0.45; % prior inf. for group-specific parms gleich wie sylvia (Identitätsmatrix), scale kleiner--info kleiner
+            scale=0.45; % prior inf. for group-specific parms gleich wie sylvia (Identit?tsmatrix), scale kleiner--info kleiner
             scale_auto=4; % prior inf. for lagged endogenous variables
             scale_dum=0.04; % prior inf. for dummy variables
             
@@ -115,7 +115,7 @@ pack
 %             %test_run_model4;
 %             
 %             prm=0.0; %mean of group-specific parameter if I_t==1;
-%             scale=0.45; % prior inf. for group-specific parms gleich wie sylvia (Identitätsmatrix), scale kleiner--info kleiner
+%             scale=0.45; % prior inf. for group-specific parms gleich wie sylvia (Identit?tsmatrix), scale kleiner--info kleiner
 %             scale_auto=4; % prior inf. for lagged endogenous variables
 %             scale_dum=0.04; % prior inf. for dummy variables
 %             
@@ -171,7 +171,7 @@ pack
 %             %test_run_model4;
 %             
 %             prm=0.0; %mean of group-specific parameter if I_t==1;
-%             scale=0.45; % prior inf. for group-specific parms gleich wie sylvia (Identitätsmatrix), scale kleiner--info kleiner
+%             scale=0.45; % prior inf. for group-specific parms gleich wie sylvia (Identit?tsmatrix), scale kleiner--info kleiner
 %             scale_auto=4; % prior inf. for lagged endogenous variables
 %             scale_dum=0.04; % prior inf. for dummy variables
 %             
@@ -229,7 +229,7 @@ pack
 %             %test_run_model4;
 %             
 %             prm=0.0; %mean of group-specific parameter if I_t==1;
-%             scale=0.45; % prior inf. for group-specific parms gleich wie sylvia (Identitätsmatrix), scale kleiner--info kleiner
+%             scale=0.45; % prior inf. for group-specific parms gleich wie sylvia (Identit?tsmatrix), scale kleiner--info kleiner
 %             scale_auto=4; % prior inf. for lagged endogenous variables
 %             scale_dum=0.04; % prior inf. for dummy variables
 %             

@@ -7,12 +7,12 @@ ser=ser(1,2:end); % string array of data series
 if ~strcmp(file,'uni');
     %PDS
     if strcmp(file,'logit');
-        ser_excl={'HICP-IG';'HICP';'ser-tot-dem'}; %string of series to exclude
+        ser_excl={'HICP-IG';'HICP'}; %string of series to exclude
         ser_sel = ser(find(1-sum(strcmp(ser(ones(size(ser_excl,1),1),:),ser_excl(:,ones(1,size(ser,2)))),1))); % string array of included series
         ser_ind=find(1-sum(strcmp(ser(ones(size(ser_excl,1),1),:),ser_excl(:,ones(1,size(ser,2)))),1)); %choose which countries to include, index array
         if preclas
-            ser_cont={'YER';'MTR';'PCR';'ITR';'XTR';'ser-tot-capa';'ind-manuf-tppa';'ind-manuf-ossk';'bat-tot-apa';'bat-tot-epa';'bat-tot-tuc';'HICP-FO';'HICP-E';'CLIMAT-FR';'IPI-CZ'}; %series falling into the contemporaneous group
-            ser_lead={'ser-tot-capre';'ser-tot-dem';'ind-manuf-pgp';'ind-manuf-tppre';'ind-manuf-oscde';'KTAUF';'bat-tot-apr';'bat-tot-jcc'}; %series falling into the leading group
+            ser_cont={'YER';'MTR';'PCR';'ITR';'XTR';'ser-capa';'manuf-tppa';'manuf-ossk';'bat-apa';'bat-epa';'bat-tuc';'HICP-FO';'HICP-E';'CLIMAT-FR';'CLIMAT-FR-EMPL';'IPI-CZ'}; %series falling into the contemporaneous group
+            ser_lead={'ser-capre';'ser-dem';'manuf-pgp';'manuf-tppre';'manuf-oscde';'manuf-oscd';'bat-apre';'bat-jcc'}; %series falling into the leading group
             ind_cont=find(sum(strcmp(ser_sel(ones(size(ser_cont,1),1),:),ser_cont(:,ones(1,size(ser_sel,2)))),1)); %index of included series defining the contemporaneous group
             ind_lead=find(sum(strcmp(ser_sel(ones(size(ser_lead,1),1),:),ser_lead(:,ones(1,size(ser_sel,2)))),1)); %index of included series defining the leading group
         elseif ~preclas
@@ -23,33 +23,33 @@ if ~strcmp(file,'uni');
         end
         %PP
     elseif strcmp(file,'pp');
-        ser_excl={'HICP-IG';'HICP';'ser-tot-dem'};
+        ser_excl={'HICP-IG';'HICP'};
         ser_sel = ser(find(1-sum(strcmp(ser(ones(size(ser_excl,1),1),:),ser_excl(:,ones(1,size(ser,2)))),1))); % string array of included series
         ser_ind=find(1-sum(strcmp(ser(ones(size(ser_excl,1),1),:),ser_excl(:,ones(1,size(ser,2)))),1)); %choose which countries to include, index array
         ser_cont=[];%{'YER';'PCR';'ITR';'MTR';'XTR'}; %series falling into the contemporaneous group
-        ser_lead=[];%{'KTAUF';'KTPROL';'QTAUF';'EINDSE'}; %series falling into the leading group
+        ser_lead=[];%{'manuf-oscd';'KTPROL';'QTAUF';'EINDSE'}; %series falling into the leading group
         ind_cont=[];
         ind_lead=[];
         %BDS
     elseif strcmp(file,'bds');
-        ser_excl={'HICP-IG';'HICP';'ser-tot-dem'};
+        ser_excl={'HICP-IG';'HICP'};
         ser_sel = ser(find(1-sum(strcmp(ser(ones(size(ser_excl,1),1),:),ser_excl(:,ones(1,size(ser,2)))),1))); % string array of included series
         ser_ind=find(1-sum(strcmp(ser(ones(size(ser_excl,1),1),:),ser_excl(:,ones(1,size(ser,2)))),1)); %choose which countries to include, index array
         ser_cont={'YER'};%'PCR';'ITR';'MTR';'XTR'}; %series falling into the contemporaneous group
-        ser_lead={'KTAUF'};%'KTPROL';'QTAUF';'EINDSE'}; %series falling into the leading group
+        ser_lead={'manuf-oscd'};%'KTPROL';'QTAUF';'EINDSE'}; %series falling into the leading group
         ind_cont=find(sum(strcmp(ser_sel(ones(size(ser_cont,1),1),:),ser_cont(:,ones(1,size(ser_sel,2)))),1)); %index of included series defining the contemporaneous group
         ind_lead=find(sum(strcmp(ser_sel(ones(size(ser_lead,1),1),:),ser_lead(:,ones(1,size(ser_sel,2)))),1)); %index of included series defining the leading group
 
     end
     ser_diff={}; %series falling into the contemporaneous group
-    ser_lev={'HICP-IG';'HICP';'YER';'MTR';'PCR';'ITR';'XTR';'ser-tot-capa';'ind-manuf-tppa';'ind-manuf-ossk';'bat-tot-apa';'bat-tot-epa';...
-        'bat-tot-tuc';'HICP-FO';'HICP-E';'CLIMAT-FR';'IPI-CZ';...
-        'ser-tot-capre';'ser-tot-dem';'ind-manuf-pgp';'ind-manuf-tppre';'ind-manuf-oscde';'KTAUF';'bat-tot-apr';'bat-tot-jcc'};
+    ser_lev={'HICP-IG';'HICP';'YER';'MTR';'PCR';'ITR';'XTR';'ser-capa';'manuf-tppa';'manuf-ossk';'bat-apa';'bat-epa';...
+        'bat-tuc';'HICP-FO';'HICP-E';'CLIMAT-FR';'CLIMAT-FR-EMPL';'IPI-CZ';...
+        'ser-capre';'ser-dem';'manuf-pgp';'manuf-tppre';'manuf-oscde';'manuf-oscd';'bat-apre';'bat-jcc'};
     ind_lev=[];
     ind_levex=ones(1,size(ser,2))==1;
 
 elseif strcmp(file,'uni') % Supprimer surement
-    ser_excl={'HICP-IG';'HICP';'ser-tot-dem'};
+    ser_excl={'HICP-IG';'HICP'};
     ser_sel = ser(find(1-sum(strcmp(ser(ones(size(ser_excl,1),1),:),ser_excl(:,ones(1,size(ser,2)))),1))); % string array of included series
     ser_ind=find(1-sum(strcmp(ser(ones(size(ser_excl,1),1),:),ser_excl(:,ones(1,size(ser,2)))),1)); %choose which countries to include, index array
     ser_cont={'YER'};%series falling into the contemporaneous group
@@ -69,7 +69,7 @@ data_raw=data;
 
 
 nobs=size(data,1);
-cend = 2018.75; 
+cend = 2020.75; 
 cal = [sort(cend-[1:nobs]/4)+1/4]';%Modif AQLT
 % cal_beg=cal(1);cal_end=cal(end);
 
@@ -135,7 +135,7 @@ if sg_change
     %dlo_unadj=dlo_unadj.*sg(ones(nobs,1),:);
     %data_raw=data_raw.*sg(ones(size(data_raw,1),1),:);
     if K>1
-    [sg] = neg_corr_sign(dlo,ser_sel,{'KTAUF'}); %change sign for series significantly negatively correlated with KTAUF
+    [sg] = neg_corr_sign(dlo,ser_sel,{'manuf-oscd'}); %change sign for series significantly negatively correlated with manuf-oscd
     %dlo=dlo.*sg(ones(nobs,1),:);%Commentaires AQLT
     %dlo_obs=dlo_obs.*sg(ones(nobs,1),:);
     %dlo_unadj=dlo_unadj.*sg(ones(nobs,1),:);
@@ -146,7 +146,7 @@ end
 if S_logit
     corr_c={'YER'}; %correlation with GDP
     c_ind=find(sum(strcmp(ser_sel(ones(size(corr_c,1),1),:),corr_c(:,ones(1,size(ser_sel,2)))),1));
-    corr_l={'KTAUF'}; %correlation with orders
+    corr_l={'manuf-oscd'}; %correlation with orders
     l_ind=find(sum(strcmp(ser_sel(ones(size(corr_l,1),1),:),corr_l(:,ones(1,size(ser_sel,2)))),1));
     [R P]=corrcoef(dlo);
     Zlogit=[R(c_ind,:)' R(l_ind,:)'];

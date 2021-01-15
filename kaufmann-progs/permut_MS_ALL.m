@@ -20,9 +20,9 @@ indexMSsort=[1 1 1];indexsort=1; %which switching parameter ( in each group) is 
                                    % which group-specific parameter
                                    % identifies the cluster 
 ind_enc=[1 2]; %dynamic structure identification: first contemporaneous, second leading
-for cal_beg=[2001];
+for cal_beg=[date_deb];
     cal_end=cal_beg+span;
-    for cal_end_Est=[2018.75];
+    for cal_end_Est=[2020.75];
     for K=3;
         
         for lag_dlo=[2]; ['lag=' int2str(lag_dlo)] %lag endogenous variable
