@@ -1,4 +1,4 @@
-ax_fnt=18;
+ax_fnt=18;%SUPPRIMER
 lab_fnt=18;
 
 sg_change=0

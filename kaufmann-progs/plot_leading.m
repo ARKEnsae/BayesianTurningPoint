@@ -16,7 +16,7 @@ Pclas=1;
 rest_diff=0;
 for cal_beg=[date_deb];
     cal_end=cal_beg+span;
-    for cal_end_Est=[2006.75];
+    for cal_end_Est=[2020.75];
     for K=[3];
         for lag_dlo=[2]; ['lag=' int2str(lag_dlo)] %lag endogenous variable
             lag_dir=0; %lag exogenous variable

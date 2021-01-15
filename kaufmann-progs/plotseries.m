@@ -1,4 +1,4 @@
-file='logit';
+file='logit';%SUPPRIMER
 cal_beg=date_deb;
 cal_end=2006;
 cal_end_est=2006.75;
@@ -51,7 +51,7 @@ nr=ngr/nc;
 nctr=size(data,2);
 nfig=ceil(nctr/ngr);
 
-cend=2007;
+cend=2020.75;
 nobs=size(data,1);
 cal= cend-[nobs:-1:1]./4;
 
