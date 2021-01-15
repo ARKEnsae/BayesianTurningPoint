@@ -34,8 +34,6 @@ shrink=1;
 true=0; %flag to start with true values of I_t and of parameters (if 1), to start with general values (if 0),
 % to start with mean value of initial estimation (if 2);
 
-% cal_beg=[1980 1985 1990 1995];
-% cal_end=[1986:2003];
 span=18; %=18 working with dataset ending in 2006, =15 working with dataset ending in 2003
 maxlag=4; %maximum endogenous or exogenous variables
 

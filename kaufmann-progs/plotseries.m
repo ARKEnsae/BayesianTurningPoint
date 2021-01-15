@@ -1,5 +1,5 @@
 file='logit';
-cal_beg=1988;
+cal_beg=date_deb;
 cal_end=2006;
 cal_end_est=2006.75;
 unit_spec_var=0;
