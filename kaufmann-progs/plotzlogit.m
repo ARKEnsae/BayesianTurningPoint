@@ -44,13 +44,13 @@ for j=1:MC
     prob_prior_pp(:,:,j)=exp(Z_logit_pp*permute(gammc(j,:,:),[2 3 1]))./kron(ones(1,K),sum(exp(Z_logit_pp*permute(gammc(j,:,:),[2 3 1])),2));
 %    prob_post(:,:,j)=exp(Zlogit*permute(gammc(j,:,:),[2 3 1]))./kron(ones(1,K),sum(exp(Zlogit*permute(gammc(j,:,:),[2 3 1])),2));
 end
-[Zlogit_manuf-oscd,Zind_manuf-oscd]=sort(Zlogit(:,3));
+[Zlogit_oscd,Zind_oscd]=sort(Zlogit(:,3));
 figure(double(gcf)+1)
 subplot(2,1,1)
 plot(Z_logit_pp(:,3),mean(prob_prior_pp(:,2,:),3))
 title('P(S_i=2)|\cdot, depending on corr with manuf-oscd')
 subplot(2,1,2)
-bar(1:N,mean(prob_post(Zind_manuf-oscd,2,:),3),0.1)
+bar(1:N,mean(prob_post(Zind_oscd,2,:),3),0.1)
 
 [Z1,Z2]=meshgrid(-1.0:0.1:1.0);
 P1p=0;P2p=0;
