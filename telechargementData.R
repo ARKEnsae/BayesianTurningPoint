@@ -34,14 +34,13 @@ ind_evol = c("HIPC-FO", "HICP-IG", "HICP-E",
 			 "HICP", "IPI-CZ")
 data_diff <- ts.union(diff(moy_trim[,ind_diff],1), ev(moy_trim[,ind_evol]))
 colnames(data_diff) <- c(ind_diff, ind_evol)
-data_diff <- na.omit(data_diff)
+data_diff <- window(na.omit(data_diff),start = 1992)
 data_diff[,"manuf-ossk"] <- -data_diff[,"manuf-ossk"]
 
 AQLTools::ctrl_c(scale(data_diff), col.names = FALSE)
 data_diff_df <- as.data.frame(data_diff)
-d <- ctrl_v()
-d[,colnames(data_diff_df)]
 
-colnames(data_diff_df)
-colnames(data_diff_df)	   																							-1L))
-dput(ctrl_v())
+# Normalisation PIB :
+# Selectionner toutes les colonnes, nom compris jusqu'à derniere date 
+d <- ctrl_v()[-1,] # 1ere ligne est l'indice de gorupe
+AQLTools::ctrl_c(scale(d), col.names = FALSE)
