@@ -1,6 +1,6 @@
 %program to plot some interesting output for various estimated models
 
-span=18;
+span=28;
 rest_diff=0;
 pool=1;
 shrink=1;

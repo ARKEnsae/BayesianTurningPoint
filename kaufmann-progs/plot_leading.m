@@ -2,7 +2,7 @@
 
 % cal_beg=[1995];
 % cal_end=[1986:2003];
-span=18;
+span=28;
 pool=1;
 poolparms=1;
 shrink=1;
