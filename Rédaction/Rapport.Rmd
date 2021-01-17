@@ -32,6 +32,7 @@ header-includes:
 - \usepackage{subcaption}
 - \usepackage{amsfonts}
 - \usepackage{dsfont}
+- \usepackage{bbold}
 - \usepackage{xspace}
 - \usepackage{enumitem}
 - \usepackage{pifont}
@@ -112,6 +113,7 @@ Nous pouvons passons à l'estimation par MCMC pour obtenir une posteriori sur le
 
 Nous partons de $\pi(\psi|Y^T) \propto L(Y^T|\psi)\pi(\psi)$ où $(L(Y^T|\psi)$ est la vraisemblance, que l'on peut réécrire.
 En effet, $L(Y^T|\psi) = \prod\limits_{t=p+1}^T\prod\limits_{i=1}^Nf(y_{i,t}|y_i^{t-1},\mu_{I_{S_i,t}}^{S_i},\phi^{S_i},Q^{S_i},\lambda_i,\sigma^2)$, avec $$f(y_{i,t}|y_i^{t-1},\mu_{I_{S_i,t}}^{S_i},\phi^{S_i},Q^{S_i},\lambda_i,\sigma^2)=\displaystyle\frac{1}{\sqrt{2\pi\nu_{it}^{S_i}}}\exp\big( -\displaystyle\frac{1}{2\nu_{it}^{S_i}}\big(y_{it} - \mu_{I_{S_i,t}}^{S_i} - \sum\limits_{j=1}^p \phi_j^{S_i}y_{i,t-1} \big)^2\big)$$
+Avec $y_{it} = X^{S_i}_{it}\beta^{S_i} + \epsilon_{it}^*, \text{ où } \epsilon_{it}^*\sim N(0,\nu_{it}^{S_i}), X^{S_i}_{it} = (D_{1t}^{I(S_i)},D_{2t}^{I(S_i)},y_{i,t-1}, \dots, y_{i,t-p}),D_{jt}^{I(S_i)}=\mathbb{1}(I_{S_i,t}=j), \beta^{S_i} = (\mu_1^{S_i},\mu_2^{S_i}, \phi^{S_i}).$, et $\nu_{it}^{S_i} = X^{S_i}_{it}Q^{S_i}X^{S_i'}_{it} + \displaystyle\frac{\sigma^2}{\lambda_i}$.
 
 Nous supposerons dans la suite que la structure $\rho^*$ est connue (déterminée par d'autres méthodes), on peut alors réécrire la distribution a priori sur $\phi$ ainsi :
 
@@ -133,11 +135,117 @@ Dans la première étape, nous générerons les indicatrices de groupes pour cha
 
 # Applications
 
-L'article \cite{Kaufmann} a utilisé la spécification théorique présentée dans la partie précédente sur des données autrichiennes. Nous avons décidé dans le cadre de ce travail d'appliquer cela sur des données françaises. Nous avons donc récupéré un certain nombre de données liées au PIB ou aux enquêtes conjonctures, dont le détail est expliqué dans le tableau XX.
+L'article \cite{Kaufmann} a utilisé la spécification théorique présentée dans la partie précédente sur des données autrichiennes. Nous avons décidé dans le cadre de ce travail d'appliquer cela sur des données françaises. Nous avons donc récupéré un certain nombre de données liées au PIB ou aux enquêtes conjonctures, dont le détail est expliqué dans le tableau \ref{tableau_var}.
+
+Nous avons retenu ici deux groupes pour les séries : celles qui coïncident avec le cycle ($S_i = 1$) et celles qui le mène ($S_i = 2$). Pour l'analyse, nous nous limitons aux hypothèses suivantes :
+
+1. La structure ($\rho^*$) est connue en avance : nous avons réparti chaque série dans un des groupes.
+
+2. La classification est totale : on suppose qu'il n'y a pas de groupes de séries indépendantes.
+
+3. L'*a priori* sur $S_i$ est de type logit.
+
+Nous nous sommes basés sur les programmes mis à disposition par \cite{Kaufmann} et allons essayer d'analyser les résultats obtenus.
+
+\begin{figure}
+\begin{minipage}{.5\textwidth}
+\includegraphics[width=8cm]{img/fig2a.png}
+\end{minipage}
+\hfill
+\begin{minipage}{.5\textwidth}
+\includegraphics[width=8cm]{img/fig2b.png}
+\end{minipage}
+\caption{Hétérogénéité des séries - groupe 1 (ligne plein) et 2 (pointillés). A gauche, somme des coefficients de l'AR. A droite, $\sigma^2, \sigma^2/\lambda_i$}
+\label{heterogeneite}
+\end{figure}
+
+\begin{figure}
+\begin{minipage}{.5\textwidth}
+\includegraphics[width=8cm]{img/fig3b.png}
+\end{minipage}
+\hfill
+\begin{minipage}{.5\textwidth}
+\includegraphics[width=8cm]{img/fig3a.png}
+\end{minipage}
+\caption{Moyenne inconditionnelle dans les différents états}
+\label{etats}
+\end{figure}
+
+
+\begin{figure}
+\centering
+\includegraphics[width=12cm]{img/fig4.png}
+\caption{$\pi(\gamma,\gamma_z|Y^T)$ - groupe 1 (trait plein) et 2 (pointillé)}
+\label{pi_gamma}
+\end{figure}
+
+
+\begin{figure}
+\begin{minipage}{.5\textwidth}
+\includegraphics[width=8cm]{img/fig5a.png}
+\end{minipage}
+\hfill
+\begin{minipage}{.5\textwidth}
+\includegraphics[width=8cm]{img/fig5b.png}
+\end{minipage}
+\caption{Probabilités \textit{a priori} et \textit{a posteriori} $P(S = j|Z,Y^T)$ et $P(S_i = j|Z_i,Y^T)$}
+\label{graph3d}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[width=15cm]{img/fig6.png}
+\caption{Probabilités \textit{a posteriori} $P(I_{kt}=1|Y^T)$ des séries coïncidantes $(S_i=1)$ et qui mènent le cycle $(S_i=2)$ sur la période 1992-2020 avec une classification a priori.}
+\label{retournements}
+\end{figure}
 
 # Discussion
 
+## Prévision
+
+## Comparaison avec l'indicateur de retournement de l'Insee
+
 # Conclusion
+
+\newpage
+
+# Annexes
+
+
+\begin{center}
+   \begin{tabular}{ | c | l | }
+     \hline
+     \textbf{Variable} & \textbf{Commentaire} \\ \hline
+     YER & PIB\\ \hline
+     MTR & Imports \\ \hline
+     PCR & Consommation\\ \hline
+     ITR & Investissements \\ \hline
+     XTR & Exports \\ \hline
+     manuf-oscd & Enquête de conjoncture industrie -  carnet de commandes généraux \\ \hline
+     manuf-oscde & Enquête de conjoncture industrie - carnet de commandes étrangers \\ \hline
+     manuf-ossk & Enquête de conjoncture industrie - niveau des stocks de produits finis\\ \hline
+     manuf-tppre & Enquête de conjoncture industrie - tendance prévue de production\\ \hline
+     manuf-pgp & Enquête de conjoncture industrie - perspectives générales\\ \hline
+     ser-capa & Enquête de conjoncture services - évolution passée du chiffre d'affaires\\ \hline
+     ser-capre & Enquête de conjoncture services - évolution prévue du chiffre d'affaires\\ \hline
+     ser-dem & Enquête de conjoncture services - demande prévue \\ \hline
+     bat-jcc & Enquête de conjoncture bâtiment - niveau des carnets de commandes \\ \hline
+     bat-epa & Enquête de conjoncture bâtiment - évolutions passée des effectifs\\ \hline
+     bat-tuc & Enquête de conjoncture bâtiment - taux d'utilisation des capacités de production\\ \hline
+     bat-apre & Enquête de conjoncture bâtiment -  évolution prévue de l'activité\\ \hline
+     bat-apa & Enquête de conjoncture bâtiment - évolution passée de l'activité \\ \hline
+     CLIMAT-FR & Climat des affaires - solde d'opinion\\ \hline
+     CLIMAT-FR-EMPL & Climat des affaires sur l'emploi \\ \hline
+     HIPC-FO & Indice des prix - nourriture \\ \hline
+     HICP-IG & Indice des prix - produits industriels \\ \hline
+     HICP-E & Indice des prix - énergie \\ \hline
+     HICP & Indice des prix \\ \hline
+     IPI-CZ & Indice de production industrielle - industrie manufacturière\\
+     \hline
+   \end{tabular}
+   \captionof{table}{Variables utilisées dans l'analyse}
+   \label{tableau_var}
+ \end{center}
 
 \newpage
 
