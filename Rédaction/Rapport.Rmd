@@ -74,19 +74,24 @@ Dans la suite, nous travaillerons avec des séries centrées, réduites et corri
 $$ y_{it} = \mu_{I_{it}}^{i} + \phi_1^i y_{i,t-1} + \dots + \phi_p y_{i,t-p} + \epsilon_{it}$$
 avec $\epsilon_{it} \sim \mathcal{N}\big(0, \displaystyle\frac{\sigma}{\lambda_i^2}\big)$. L'indice $I_{it}$ précisera à quel moment du cycle nous nous trouverons, ainsi on aura $I_{it} \in \{1,2\}$.
 
-Théoriquement, les séries étudiées sont supposées être indépendantes les unes des autres. En pratique, cependant, il existe des séries qui suivent des chemins proches et on peut donc vouloir exploiter cette information pour notre estimation. On va donc chercher à créer des groupes de séries de manière intelligente. Dans ce but, on va donc introduire une indicatrice d'appartenance à un groupe que l'on va note $S_i \in \{1, \dots, K \}$. Nous allons donc dans la suite supposé que pour les séries appartenant à un même groupe, nous allons avoir des paramètres distribués au sein d'une moyenne et ajouter un paramètre d'hétérogénéité, tel que :
+Théoriquement, les séries étudiées sont supposées être indépendantes les unes des autres. 
+En pratique, cependant, il existe des séries qui suivent des évolutions proches et il peut donc être utile d'exploiter cette information pour notre estimation. 
+Nous allons donc chercher à créer des groupes de séries de manière intelligente. 
+Dans ce but, nous introduisons la variable $S_i \in \{1, \dots, K \}$ qui indique dans quel groupe est classée la variable $i$.
+Dans la suite, nous supposons que toutes les séries d'un groupe vons avoir des paramètres distribués selon une même loi mais différente selon la position dans le cycle :
 
 $$ \mu_{I_{S_i,t}}^i \sim \begin{cases}
 \mathcal{N}(\mu_1^k,q_1^k) \text{ si } S_i = k \text{ et } I_{kt} = 1\\
 \mathcal{N}(\mu_2^k,q_2^k) \text{ si } S_i = k \text{ et } I_{kt} = 2
 \end{cases} $$
 $$ (\phi_1^i, \dots, \phi_p^i) \sim \mathcal{N}(\phi^k,Q_{\phi}^k) \text{ si } S_i = k$$
-Pour la suite, nous définirons la période 1 comme celle où l'on se trouve en-dessous de la croissance moyenne et la période 2 comme celle où l'on se trouve au-dessus. Nous ferons également l'hypothèse que $I_{kt}$ suit un processus de Markov, c'est-à-dire $\mathbb{P}(I_{k,t} = j | I_{k,t-1} = j) = \xi_{j,l}^k$ avec $j,l \in \{1,2\}$. Par propriété sur les chaînes de Markov, on sait donc que $\forall j \in \{1,2\}, \sum\limits_{l=1}^2 \xi_{j,l}^k = 1$. Cette spécification permet de repérer en temps réel les points où le cycle change de période. 
+Pour la suite, nous considérons que la période 1 ($I_{kt} = 1$) comme celle où l'on se trouve la croissance est supérieure à la moyenne (en haut du cycle) et la période 2 comme celle où la croissance est inférieure à la moyenne (en bas de cycle). 
+Nous ferons également l'hypothèse que $I_{kt}$ suit un processus de Markov, c'est-à-dire $\mathbb{P}(I_{k,t} = j | I_{k,t-1} = j) = \xi_{j,l}^k$ avec $j,l \in \{1,2\}$. Par propriété sur les chaînes de Markov, on sait donc que $\forall j \in \{1,2\}, \sum\limits_{l=1}^2 \xi_{j,l}^k = 1$. Cette spécification permet de repérer en temps réel les points où le cycle change de période. 
 
-Il faut également proposer une spécification pour la variable $S_i$, nous supposerons qu'elle suit un modèle logit multinomilal, c'est-à-dire $\mathbb{P}(S_i = k |\gamma_1, \dots, \gamma_K, \gamma_{z,1}, \dots, \gamma_{z,K-1}) = \displaystyle\frac{\exp(\gamma_k + Z_k\gamma_{z,k})}{1 + \sum\limits_{l=1}^{K-1} \exp(\gamma_l + Z_l\gamma_{z,l})}$ où l'on prendra le groupe K comme référence ($\gamma_K = \gamma_{z,K}=0$), $Z_i$ est un vecteur permettant de repérer l'appartenance à un groupe et les paramètres $\gamma$ sont inconnus mais spécifiques aux groupes. 
+Nous supposons que la variable $S_i$ suit un modèle logit multinomial, c'est-à-dire $\mathbb{P}(S_i = k |\gamma_1, \dots, \gamma_K, \gamma_{z,1}, \dots, \gamma_{z,K-1}) = \displaystyle\frac{\exp(\gamma_k + Z_k\gamma_{z,k})}{1 + \sum\limits_{l=1}^{K-1} \exp(\gamma_l + Z_l\gamma_{z,l})}$ où l'on prendra le groupe K comme référence ($\gamma_K = \gamma_{z,K}=0$), $Z_i$ est un vecteur permettant de repérer l'appartenance à un groupe et les paramètres $\gamma$ sont inconnus mais spécifiques aux groupes. 
 
-Enfin, il reste à ajouter une spécification pour en compte la dynamique du cycle. Pour cela, on va supposer avoir deux groupes spécifiques pour la suite de l'analyse et $K-2$ groupes indépendants. Les séries telles que $S_i = 2$ seront les séries qui mènent le cycle, tandis que les séries pour lesquelles $S_i = 1$ seront les séries qui coïncident avec le cycle. On va donc définir une nouvelle variable $I^*$.
-
+Enfin, il reste à ajouter une spécification pour en compte la dynamique du cycle. 
+Pour cela, nous supposons avoir deux groupes spécifiques pour la suite de l'analyse et $K-2$ groupes indépendants. Les séries telles que $S_i = 2$ seront les séries qui mènent le cycle (indicateurs avancés), tandis que les séries pour lesquelles $S_i = 1$ seront les séries qui coïncident avec le cycle (tels que le PIB). Nous définissons donc une nouvelle variable $I^*$ de la façon suivante:
 $$\begin{cases}
 I^* = 1 := (I_{1t}=1,I_{2t}=1) \\
 I^* = 2 := (I_{1t}=1,I_{2t}=2) \\
@@ -94,13 +99,18 @@ I^* = 3 := (I_{1t}=2,I_{2t}=1) \\
 I^* = 4 := (I_{1t}=2,I_{2t}=2) 
 \end{cases}$$
 
-En cas d'incertitude sur la structure dynamique des nos séries, c'est-à-dire sur l'identification des groupes 1 et 2, on peut introduire un paramètre de structure $\rho^*$, caractérisant la structure entre les groupes. Il sera donc la réalisation d'une des $K(K-1)$ permutations de $\{1,2,0_{K-2}\}$. On considéra que $\rho^*=1$ pour le groupe des séries coïncidentes, $\rho^*=2$ pour celles qui mènent le cycle, et toute autre valeur renverra aux séries aux comportements autonomes.
+En cas d'incertitude sur la structure dynamique des nos séries, c'est-à-dire sur l'identification des groupes 1 et 2, on peut introduire un paramètre de structure $\rho^*$, caractérisant la structure entre les groupes. 
+Il sera donc la réalisation d'une des $K(K-1)$ permutations de $\{1,2,0_{K-2}\}$. 
+<!-- Pas compris -->
+On considéra que $\rho^*=1$ pour le groupe des séries coïncidentes, $\rho^*=2$ pour celles qui mènent le cycle, et toute autre valeur renverra aux séries aux comportements autonomes.
 
 ## Estimation bayésienne
 ### Notations
-Dans la suite, on va noter $\forall i \in \{1,\dots,N\}, y_i^t = \{y_{i,t},y_{i,t-1},\dots,y_{i,1}\}, Y_t = \{y_{1,t}, \dots, y_{N,t} \} \text{ et } Y^t = \{Y_t, \dots, Y_1\}$. De même, on notera $S^N = \{S_1, \dots, S_N\}$ l'ensemble des indicatrices d'appartenances aux groupes, $I^T = \{I_1^T, \dots, I_K^T\}$ où $I_k^T=\{I_{k,T}, \dots, I_{k,1}\}$ les indicatrices d'états. Enfin, on notera $\lambda^N = \{\lambda_1, \dots, \lambda_N\}$ qui regroupe les poids qui seront utilisés. 
 
-Par commodité, on notera également $\theta=(\mu_1^1, \mu_2^1, \dots, \mu_1^K, \mu_2^K, \phi^1, \dots, \phi^K, Q^1, \dots, Q^K, \sigma^2, \xi^*, \xi^{\rho^*(k)=0},\gamma, \gamma_z)$ où $Q^k = 
+Dans la suite, notons $\forall i \in \{1,\dots,N\}, y_i^t = \{y_{i,t},y_{i,t-1},\dots,y_{i,1}\}, Y_t = \{y_{1,t}, \dots, y_{N,t} \} \text{ et } Y^t = \{Y_t, \dots, Y_1\}$. 
+De même, notons $S^N = \{S_1, \dots, S_N\}$ l'ensemble des indicatrices d'appartenances aux groupes, $I^T = \{I_1^T, \dots, I_K^T\}$ où $I_k^T=\{I_{k,T}, \dots, I_{k,1}\}$ les indicatrices d'états. Enfin, nous notons $\lambda^N = \{\lambda_1, \dots, \lambda_N\}$ qui regroupe les poids qui seront utilisés. 
+
+Par commodité, nous noterons également $\theta=(\mu_1^1, \mu_2^1, \dots, \mu_1^K, \mu_2^K, \phi^1, \dots, \phi^K, Q^1, \dots, Q^K, \sigma^2, \xi^*, \xi^{\rho^*(k)=0},\gamma, \gamma_z)$ où $Q^k = 
 \begin{pmatrix}
 q_1^k & 0 & 0 \\
 0 & q_2^k & 0 \\
@@ -111,15 +121,16 @@ Nous pouvons passons à l'estimation par MCMC pour obtenir une posteriori sur le
 
 ### Estimation par MCMC
 
-Nous partons de $\pi(\psi|Y^T) \propto L(Y^T|\psi)\pi(\psi)$ où $(L(Y^T|\psi)$ est la vraisemblance, que l'on peut réécrire.
+Nous partons de $\pi(\psi|Y^T) \propto L(Y^T|\psi)\pi(\psi)$ où $L(Y^T|\psi)$ est la vraisemblance, que l'on peut réécrire.
 En effet, $L(Y^T|\psi) = \prod\limits_{t=p+1}^T\prod\limits_{i=1}^Nf(y_{i,t}|y_i^{t-1},\mu_{I_{S_i,t}}^{S_i},\phi^{S_i},Q^{S_i},\lambda_i,\sigma^2)$, avec $$f(y_{i,t}|y_i^{t-1},\mu_{I_{S_i,t}}^{S_i},\phi^{S_i},Q^{S_i},\lambda_i,\sigma^2)=\displaystyle\frac{1}{\sqrt{2\pi\nu_{it}^{S_i}}}\exp\big( -\displaystyle\frac{1}{2\nu_{it}^{S_i}}\big(y_{it} - \mu_{I_{S_i,t}}^{S_i} - \sum\limits_{j=1}^p \phi_j^{S_i}y_{i,t-1} \big)^2\big)$$
 Avec $y_{it} = X^{S_i}_{it}\beta^{S_i} + \epsilon_{it}^*, \text{ où } \epsilon_{it}^*\sim N(0,\nu_{it}^{S_i}), X^{S_i}_{it} = (D_{1t}^{I(S_i)},D_{2t}^{I(S_i)},y_{i,t-1}, \dots, y_{i,t-p}),D_{jt}^{I(S_i)}=\mathbb{1}(I_{S_i,t}=j), \beta^{S_i} = (\mu_1^{S_i},\mu_2^{S_i}, \phi^{S_i}).$, et $\nu_{it}^{S_i} = X^{S_i}_{it}Q^{S_i}X^{S_i'}_{it} + \displaystyle\frac{\sigma^2}{\lambda_i}$.
 
-Nous supposerons dans la suite que la structure $\rho^*$ est connue (déterminée par d'autres méthodes), on peut alors réécrire la distribution a priori sur $\phi$ ainsi :
+Nous supposerons dans la suite que la structure $\rho^*$ est connue (déterminée par d'autres méthodes), nous pouvons alors réécrire la distribution a priori sur $\phi$ ainsi :
 
 $$\pi(\phi) = \pi(I^{*T}|\rho^*, \xi^*) \prod \limits_{\rho^*(k)=0} \pi(I^{T}_k|\rho^*,\xi^*)\pi(S^N|\gamma, \gamma_z,Z^N)\pi(\lambda^N)\pi(\theta)$$
 
-où les densités $\pi(I^{*T}|\rho^*, \xi^*)$,$\pi(I^{T}_k|\rho^*,\xi^*)$ et $\pi(S^N|\gamma, \gamma_z,Z^N)$ sont connues. On supposera que les poids ($\lambda^N$) sont indépendants et suivent une loi de Gamma. Il reste à spécifier l'a priori sur $\pi(\theta)$ : pour cela, nous décomposons $\theta$ en blocs sur lesquels nous faisons des a priori standards.
+où les densités $\pi(I^{*T}|\rho^*, \xi^*)$,$\pi(I^{T}_k|\rho^*,\xi^*)$ et $\pi(S^N|\gamma, \gamma_z,Z^N)$ sont connues. 
+Nous supposerons que les poids ($\lambda^N$) sont indépendants et suivent une loi de Gamma. Il reste à spécifier l'a priori sur $\pi(\theta)$ : pour cela, nous décomposons $\theta$ en blocs sur lesquels nous faisons des a priori standards.
 
 Nous cherchons ensuite à générer à partir de la loi a posteriori $\pi(\phi|Y^T)$, en se basant sur le procédé détaillé dans \cite{FruhwirthKaufmann}. Nous pouvons raisonner en 4 étapes différentes :
 
@@ -131,13 +142,16 @@ Nous cherchons ensuite à générer à partir de la loi a posteriori $\pi(\phi|Y
 
 4. $\pi(\theta|Y^T,S^N,I^T)$
 
-Dans la première étape, nous générerons les indicatrices de groupes pour chaque série puis, à partir de $\rho^*$, on obtient une réalisation pour l'indicatrice d'état de l'étape 2. Dans l'étape 4, toutes les distributions a posteriori sont conjugées aux a priori, sauf pour $\gamma$ et $\gamma_z$, nous utiliserons alors l'aglorithme de Metropolis-Hastings pour générer selon leur loi.
+Dans la première étape, nous générerons les indicatrices de groupes pour chaque série puis, à partir de $\rho^*$, nous obtenons une réalisation pour l'indicatrice d'état de l'étape 2. Dans l'étape 4, toutes les distributions a posteriori sont conjugées aux a priori, sauf pour $\gamma$ et $\gamma_z$, nous utiliserons alors l'aglorithme de Metropolis-Hastings pour générer selon leur loi.
 
 # Application aux données françaises
 
-L'article \cite{Kaufmann} a utilisé la spécification théorique présentée dans la partie précédente sur des données autrichiennes. Nous avons décidé dans le cadre de ce travail d'appliquer cela sur des données françaises. Nous avons donc récupéré un certain nombre de données liées au PIB ou aux enquêtes conjonctures, dont le détail est expliqué dans le tableau \ref{tableau_var}.
+L'article \cite{Kaufmann} a utilisé la spécification théorique présentée dans la partie précédente sur des données autrichiennes. Nous avons décidé dans le cadre de ce travail d'appliquer cela sur des données françaises. Nous avons donc récupéré un certain nombre de données liées au PIB ou aux enquêtes conjonctures^[
+Nous avons décidé de ne retenir que les soldes d'opinion utilisés pour construire l'indicateur de retournement France publié par l'Insee (voir section \@ref(sec:indretFr)) en supposant que, pour sa construction, les soldes les plus pertinents pour détecter les points de retournement avaient été retenus par l'Insee. 
+Nous avons également retenu deux indicateurs synthétiques publiés par l'Insee : le climat des affaires France, qui retrace le cycle conjoncturel, et le climat de l'emploi France, qui retrace le cycle conjoncturel spécifique de l’emploi salarié.
+], dont le détail est expliqué dans le tableau \ref{tableau_var}.
 
-Nous avons retenu ici deux groupes pour les séries : celles qui coïncident avec le cycle ($S_i = 1$) et celles qui le mène ($S_i = 2$). Pour l'analyse, nous nous limitons aux hypothèses suivantes :
+Nous avons retenu ici $K=2$ groupes pour les séries : celles qui coïncident avec le cycle ($S_i = 1$) et celles qui le mène ($S_i = 2$). Pour l'analyse, nous nous limitons aux hypothèses suivantes :
 
 1. La structure ($\rho^*$) est connue en avance : nous avons réparti chaque série dans un des groupes.
 
@@ -145,9 +159,9 @@ Nous avons retenu ici deux groupes pour les séries : celles qui coïncident ave
 
 3. L'*a priori* sur $S_i$ est de type logit.
 
-Nous nous sommes basés sur les programmes mis à disposition par \cite{Kaufmann} et allons essayer d'analyser les résultats obtenus.
+Nous avons adapté les programmes de \cite{Kaufmann}  à nos données  et nous analysons dans ce rapport les résultats obtenus.
 
-Le modèle étudié ici se caractérise entre autres par sa spécification de l'hétérogénéité entre séries, qui est prise en compte. Ceci est illustré par le graphique \ref{heterogeneite}. Il représente, à gauche, la moyenne de la somme des paramètres autorégressifs. Dans l'article, ils observaient sur leurs données une importance hétérogénité, dans notre cas, cela semble être la même chose. A droite, on représente la moyenne des variances $\frac{\sigma^2}{\lambda_i}$. Cette fois-ci, on note une différence avec ce que donnaient les données autrichiennes. En effet, notre distribution est plus étirée et moins haute que celle de l'article. Cela montre que la dispersion de l'erreur de variance est plus faible, sans doute expliquable par le processus de standardisation des séries préalables et parce qu'on travaille sur moins de données. Le graphique \ref{etats} représente la moyenne inconditionnelle de chaque groupe de série dans les deux états, selon qu'ils sont en-dessous de la croissance moyenne ou au-dessus. Cela permet d'illustrer que, contrairement à l'article, nos deux groupes de séries n'ont pas exactement le même comportement puisque les séries sont décalées les unes par rapport aux autres.
+Le modèle étudié ici se caractérise entre autres par sa spécification de l'hétérogénéité entre séries, qui est prise en compte. Ceci est illustré par le graphique \@ref(heterogeneite). Il représente, à gauche, la moyenne de la somme des paramètres autorégressifs. Dans l'article, ils observaient sur leurs données une importance hétérogénité, dans notre cas, cela semble être la même chose. A droite, on représente la moyenne des variances $\frac{\sigma^2}{\lambda_i}$. Cette fois-ci, on note une différence avec ce que donnaient les données autrichiennes. En effet, notre distribution est plus étirée et moins haute que celle de l'article. Cela montre que la dispersion de l'erreur de variance est plus faible, sans doute expliquable par le processus de standardisation des séries préalables et parce qu'on travaille sur moins de données. Le graphique \@ref(etats) représente la moyenne inconditionnelle de chaque groupe de série dans les deux états, selon qu'ils sont en-dessous de la croissance moyenne ou au-dessus. Cela permet d'illustrer que, contrairement à l'article, nos deux groupes de séries n'ont pas exactement le même comportement puisque les séries sont décalées les unes par rapport aux autres.
 
 
 \begin{figure}
@@ -215,7 +229,7 @@ Le graphique \ref{retournements} est central puisqu'il est celui permettant de r
 
 Nous l'avons vu, notre modèle permet de repérer les points de retournement de l'économie. Cependant, s'il est toujours intéressant de pouvoir le remraquer après coup, une utilisation plus immédiate serait appréciée. Le modèle permet cela puisqu'il peut être utilisé dans une optique de prévision. L'idée est d'utiliser la densité prédictive *a posteriori* $\pi(I^*_{T+h}|Y^T) = \pi(I^*_{T+h|T})$ et de simuler récursivement les valeurs futures à partir de cela. En moyennisant nos résultats sur un grand nombre de simulations, on peut alors déterminer la probabilité d'être dans les différents états.
 
-## Comparaison avec l'indicateur de retournement de l'Insee
+## Comparaison avec l'indicateur de retournement de l'Insee {#sec:indretFr}
 
 Afin de pouvoir juger de l'efficacité de notre modèle, il peut être intéressant de le comparer à des méthodes déjà existantes et utilisées par les instituts nationaux de statistiques. En France, l'Insee calcule un indicateur de retournement de conjoncture. 
 
@@ -231,9 +245,9 @@ TODO.
 
 
 \begin{center}
-   \begin{tabular}{ | c | l | }
+   \begin{tabular}{ | c | l | c|}
      \hline
-     \textbf{Variable} & \textbf{Commentaire} \\ \hline
+     \textbf{Variable} & \textbf{Commentaire} & $S_i$ \\ \hline
      YER & PIB\\ \hline
      MTR & Imports \\ \hline
      PCR & Consommation\\ \hline
@@ -252,8 +266,8 @@ TODO.
      bat-tuc & Enquête de conjoncture bâtiment - taux d'utilisation des capacités de production\\ \hline
      bat-apre & Enquête de conjoncture bâtiment -  évolution prévue de l'activité\\ \hline
      bat-apa & Enquête de conjoncture bâtiment - évolution passée de l'activité \\ \hline
-     CLIMAT-FR & Climat des affaires - solde d'opinion\\ \hline
-     CLIMAT-FR-EMPL & Climat des affaires sur l'emploi \\ \hline
+     CLIMAT-FR & Climat des affaires France \\ \hline
+     CLIMAT-FR-EMPL & Climat des affaires France sur l'emploi \\ \hline
      HIPC-FO & Indice des prix - nourriture \\ \hline
      HICP-IG & Indice des prix - produits industriels \\ \hline
      HICP-E & Indice des prix - énergie \\ \hline
