@@ -105,9 +105,10 @@ I^* = 3 := (I_{1t}=2,I_{2t}=1) \\
 I^* = 4 := (I_{1t}=2,I_{2t}=2) 
 \end{cases}$$
 
+<!-- rho* permet de généraliser, le met : c'est écrit donc relire pour savoir si c'est clair-->
 En cas d'incertitude sur la structure dynamique des nos séries, c'est-à-dire sur l'identification des groupes 1 et 2, on peut introduire un paramètre de structure $\rho^*$, caractérisant la structure entre les groupes.
 Il sera donc la réalisation d'une des $K(K-1)$ permutations de $\{1,2,0_{K-2}\}$.
-<!-- Pas compris --> On considéra que $\rho^*=1$ pour le groupe des séries coïncidentes, $\rho^*=2$ pour celles qui mènent le cycle, et toute autre valeur renverra aux séries aux comportements autonomes.
+On considéra que $\rho^*=1$ pour le groupe des séries coïncidentes, $\rho^*=2$ pour celles qui mènent le cycle, et toute autre valeur renverra aux séries aux comportements autonomes.
 
 ## Estimation bayésienne
 
@@ -176,7 +177,7 @@ La figure \@ref(fig:heterogeneite2) représente la moyenne des variances $\frac{
 Cette fois-ci, on note une différence avec ce que donnaient les données autrichiennes.
 En effet, notre distribution est plus étirée et plus applatie que celle de l'article.
 Cela montre que la dispersion de l'erreur de variance est plus faible, ce qui s'explique sans doute par le processus de standardisation des séries préalables et par le fait que nous travaillons sur moins de séries.
-Le graphique \@ref(etats) représente la moyenne inconditionnelle de chaque groupe de série dans les deux états, selon qu'ils sont en-dessous de la croissance moyenne ou au-dessus.
+Le graphique \@ref(etats) représente la moyenne non-conditionnée de chaque groupe de série dans les deux états, selon qu'ils sont en-dessous de la croissance moyenne ou au-dessus.
 Cela permet d'illustrer que, contrairement à l'article, nos deux groupes de séries n'ont pas exactement le même comportement puisque les séries sont décalées les unes par rapport aux autres.
 
 ```{=tex}
@@ -196,7 +197,7 @@ Cela permet d'illustrer que, contrairement à l'article, nos deux groupes de sé
 \begin{minipage}{.5\textwidth}
 \includegraphics[width=8cm]{img/fig3a.png}
 \end{minipage}
-\caption{Moyenne inconditionnelle dans les différents états.}
+\caption{Moyenne non-conditionnée dans les différents états.}
 \label{etats}
 \end{figure}
 ```
@@ -230,12 +231,12 @@ La courbe représente $P(S = j|Z,Y^T) = \int P(S=j|Z,\gamma,\gamma_z)\pi(\gamma,
 Cette probabilité est la plus élevée pour les séries du groupe 1 qui sont fortement corrélées avec le PIB et corrélées positivement avec le carnet de commande, la corrélation avec le PIB semblant jouer un rôle plus important puisque la probabilité varie plus selon la valeur de cette dernière.
 Nous retrouvons ici la définition du premier groupe de variables qui contient celles qui sont coincidentes avec le cycle et donc corrélées avec le PIB.
 Pour le groupe 2, la valeur de la probabilité est maximale pour les séries fortement corrélées avec le carnet de commandes et cette variable semble être plus importante.
-<!-- Pas compris le "cette variable semble être plus importante" --> Cela conforte les analyses tirées du graphique \@ref(pi-gamma).
+<!-- Corrélation avec le PIB --> Cela conforte les analyses tirées du graphique \@ref(pi-gamma).
 
 La hauteur des lignes verticales du graphique \@ref(graph3d) représente la probabilité $P(S_i = j|Z_i,Y^T)$ a posteriori pour une série d'appartenir aux groupes 1 et 2.
 On remarque que dans la grande majorité des cas, cette probabilité a été mise à jour à 0 ou à 1, grâce à l'information supplémentaire obtenue.
 On peut vérifier la qualité de notre pré-classification grâce à cela : elle semble cohérente.
-<!-- pourquoi cohérente ? -->
+<!-- pourquoi cohérente ? Traits variables dans le groupe 2. Peut-être faire un exemple-->
 
 ```{=tex}
 \begin{figure}
@@ -249,6 +250,7 @@ Le graphique \@ref(retournements) est central puisqu'il epermet de repérer les 
 Il représente les probabilités $P(I_{k,t} = 1|Y^T)$ pour les séries des deux groupes, obtenues en moyennant les résultats sur $M$ simulations.
 On remarque que les résultats semblent significatifs puisque les probabilités ont des valeurs très proches de 0 ou de 1 dans une majorité de cas.
 À partir de ce graphique, on définit le temps $t$ comme un point de retournement si $P(I_{k,t-1} = 1, I_{k,t} = 1 | Y^T) < 0,5$ et $P(I_{k,t+1} = 1, I_{k,t+2} = 1 | Y^T) > 0,5$, c'est-à-dire une faible probalité de ne pas changer d'état à ce moment et, une fois qu'on a passé ce moment, une forte probabilité de rester dans le même état.
+<!-- Ou l'inverse en terme de proba, ici c'est dans le cas d'un pic -->
 On peut donc repérer ici différents points de retournement qui correspondent à des réels évènements sur les marchés financiers en 1996 et 1999 (crise financière asiatique), 2002 et 2003 (krach boursier), 2009 (crise économique mondiale) ou encore 2013 (fin de la crise de 2008 avec encore des répercutions en France).
 Une fois des données disponibles pour la période entière du Covid-19, il sera intéressant de voir ce qui a été capté par notre modèle.
 
@@ -310,7 +312,7 @@ TODO.
      manuf-oscd & Enquête de conjoncture industrie -  carnet de commandes généraux & 2 \\ \hline
      manuf-oscde & Enquête de conjoncture industrie - carnet de commandes étrangers & 2 \\ \hline
      manuf-ossk & Enquête de conjoncture industrie - niveau des stocks de produits finis & 1\\ \hline
-     manuf-tppre & Enquête de conjoncture industrie - tendance passée de production & 1\\ \hline
+     manuf-tppa & Enquête de conjoncture industrie - tendance passée de production & 1\\ \hline
      manuf-tppre & Enquête de conjoncture industrie - tendance prévue de production & 2\\ \hline
      manuf-pgp & Enquête de conjoncture industrie - perspectives générales & 2\\ \hline
      ser-capa & Enquête de conjoncture services - évolution passée du chiffre d'affaires & 1\\ \hline
