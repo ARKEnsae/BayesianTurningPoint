@@ -196,7 +196,7 @@ Cela permet d'illustrer que, contrairement à l'article, nos deux groupes de sé
 \begin{minipage}{.5\textwidth}
 \includegraphics[width=8cm]{img/fig3a.png}
 \end{minipage}
-\caption{Moyenne inconditionnelle dans les différents états}
+\caption{Moyenne inconditionnelle dans les différents états.}
 \label{etats}
 \end{figure}
 ```
@@ -208,7 +208,7 @@ Cela s'explique par la façon dont la classification *a priori* a été effectu�
 \begin{figure}
 \centering
 \includegraphics[width=12cm]{img/fig4.png}
-\caption{$\pi(\gamma,\gamma_z|Y^T)$ - groupe 1 (trait plein) et 2 (pointillé)}
+\caption{$\pi(\gamma,\gamma_z|Y^T)$ - groupe 1 (trait plein) et 2 (pointillé).}
 \label{pi-gamma}
 \end{figure}
 ```
@@ -221,7 +221,7 @@ Cela s'explique par la façon dont la classification *a priori* a été effectu�
 \begin{minipage}{.5\textwidth}
 \includegraphics[width=8cm]{img/fig5b.png}
 \end{minipage}
-\caption{Probabilités \textit{a priori} et \textit{a posteriori} $P(S = j|Z,Y^T)$ et $P(S_i = j|Z_i,Y^T)$}
+\caption{Probabilités \textit{a priori} et \textit{a posteriori} $P(S = j|Z,Y^T)$ et $P(S_i = j|Z_i,Y^T)$.}
 \label{graph3d}
 \end{figure}
 ```
@@ -230,7 +230,7 @@ La courbe représente $P(S = j|Z,Y^T) = \int P(S=j|Z,\gamma,\gamma_z)\pi(\gamma,
 Cette probabilité est la plus élevée pour les séries du groupe 1 qui sont fortement corrélées avec le PIB et corrélées positivement avec le carnet de commande, la corrélation avec le PIB semblant jouer un rôle plus important puisque la probabilité varie plus selon la valeur de cette dernière.
 Nous retrouvons ici la définition du premier groupe de variables qui contient celles qui sont coincidentes avec le cycle et donc corrélées avec le PIB.
 Pour le groupe 2, la valeur de la probabilité est maximale pour les séries fortement corrélées avec le carnet de commandes et cette variable semble être plus importante.
-<!-- Pas compris le cette variable semble être plus importante --> Cela conforte les analyses tirées du graphique \@ref(pi-gamma).
+<!-- Pas compris le "cette variable semble être plus importante" --> Cela conforte les analyses tirées du graphique \@ref(pi-gamma).
 
 La hauteur des lignes verticales du graphique \@ref(graph3d) représente la probabilité $P(S_i = j|Z_i,Y^T)$ a posteriori pour une série d'appartenir aux groupes 1 et 2.
 On remarque que dans la grande majorité des cas, cette probabilité a été mise à jour à 0 ou à 1, grâce à l'information supplémentaire obtenue.
@@ -261,6 +261,7 @@ Cependant, s'il est toujours intéressant de pouvoir le remarquer après coup, u
 Le modèle permet cela puisqu'il peut être utilisé dans une optique de prévision.
 L'idée est d'utiliser la densité prédictive *a posteriori* $\pi(I^*_{T+h}|Y^T) = \pi(I^*_{T+h|T})$ et de simuler récursivement les valeurs futures à partir de cela.
 En moyennisant nos résultats sur un grand nombre de simulations, on peut alors déterminer la probabilité d'être dans les différents états.
+<!-- ajouter un commentaire sur la difficulté de la prévision en période de covid -->
 
 ## Comparaison avec l'indicateur de retournement de l'Insee {#sec:indretFr}
 
@@ -271,7 +272,22 @@ La valeur de cet indicateur correspond à la différence entre la probabilité q
 Il évolue donc entre $+1$ et $-1$ : un point très proche de $+1$ (respectivement de $-1$) signale que l'activité économique est en période de nette accélération (respectivement de nette décélération).
 Les moments où l'indicateur est proche de 0 sont assimilés à des phases de stabilisation, c'est-à-dire de retour du rythme de croissance de l'activité vers sa moyenne de long terme.
 
-TODO.
+Pour juger de la pertinence de la détection des points de retournement, il est nécessaire de disposer d'une datation des cycles d'expansion ou de contraction de l'activité.
+Pour avoir une datation de référence, nous appliquons la méthode décrite par \cite{bardaji} : à partir du PIB trimestriel en volume, nous extrayon la composante cyclique de la série autour de sa tendance grâce à un filtre de Christiano-Fitzgerald en retenant des cycles d’une durée de 1,5 à 10 ans et une règle de censure pour éliminer les phases de moins de 4 trimestre.
+Cela permet de déterminer les phases de ralentissement et d'accélération du PIB par rapport à sa tendance. 
+Les comptes nationaux étant encore provisoires à partir de 2018, la datation l'est également à partir de cette date.
+
+```{=tex}
+\begin{figure}[h]
+{\centering
+\includegraphics[height=8cm]{img/fig6.png}
+\caption{L’indicateur de retournement France, la datation des cycles de croissance et points de retournement déterminés par approche bayésienne.}\label{fig:indret}}
+\footnotesize
+Lecture : l’indicateur de retournement (courbe) est en zone favorable quand il est proche de 1, défavorable quand il est proche de -1. Il est ici confronté à une datation de référence des cycles de croissance : les zones grises correspondent à un ralentissement du PIB (par rapport à sa tendance) et les zones blanches à une accélération.
+\end{figure}
+```
+
+Le graphique \@ref(fig:indret).... 
 
 # Conclusion
 
@@ -282,7 +298,7 @@ TODO.
 # Annexes
 
 ```{=tex}
-\begin{center}
+\begin{table}[h]{\centering
    \begin{tabular}{ | c | l | c|}
      \hline
      \textbf{Variable} & \textbf{Commentaire} & $S_i$ \\ \hline
@@ -314,9 +330,10 @@ TODO.
      IPI-CZ & Indice de production industrielle - industrie manufacturière & 1 \\
      \hline
    \end{tabular}
-   \captionof{table}{Variables utilisées dans l'analyse}
-   \label{tableau_var}
- \end{center}
+   \caption{Variables utilisées dans l'analyse.}\label{tableau_var}}
+  \footnotesize
+Note de lecture : $S_i=1$...
+\end{table}
 ```
 \newpage
 
@@ -327,5 +344,6 @@ TODO.
 \bibitem[Sylvia Kaufmann (2010)]{Kaufmann} Kaufmann S. (2010). Dating and forecasting turning points by Bayesian clustering with dynamic structure: a suggestion with an application to Austrian data. Journal of Applied Econometrics, \textbf{25}(2): 309-344 
 \bibitem[Frühwirth-Schnatter S, Kaufmann S. (2008)]{FruhwirthKaufmann} Frühwirth-Schnatter S, Kaufmann S. (2008). Model-based clustering of multiple time series. Journal of Business and Economic Statistics \textbf{26}(1): 78
 \bibitem[Bortoli \emph{et al} (2015)]{indretFR} Bortoli C., Gorin Y., Olive P.-D. et Renne C. (2015), « De nouvelles avancées dans l’utilisation des enquêtes de conjoncture de l’Insee pour le diagnostic conjoncturel », \emph{Note de Conjoncture}, mars, p. 21-41.
+\bibitem[Bardaji \emph{et al} (2009)]{bardaji} Bardaji J., Clavel L. et Tallet F.,(2009), « Constructing a Markov-Switching Turning Point Index Using Mixed Frequencies with an Application to French Business Survey Data », \emph{OECD Journal: Journal of Business Cycle Measurement and Analysis}, Vol. 2009/2.
 \end{thebibliography}
 ```
