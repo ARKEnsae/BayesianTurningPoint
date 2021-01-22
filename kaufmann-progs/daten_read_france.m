@@ -1,4 +1,3 @@
-disp("test1")
 [data ser]=xlsread('datanorm.xls'); 
 
 % Zlogit=load('corr_0604.asc');
