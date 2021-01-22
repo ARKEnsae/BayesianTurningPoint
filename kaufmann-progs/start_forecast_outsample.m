@@ -15,7 +15,7 @@ Hf=freq*Ni; %forecast horizon
 Mf=1000; %number of forecasts
 
 file='bds';
-span=28;
+span=27;
 Pool=1;
 Shrink=0;
 Sg_change=0;

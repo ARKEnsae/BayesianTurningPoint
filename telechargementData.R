@@ -43,4 +43,4 @@ data_diff_df <- as.data.frame(data_diff)
 # Normalisation PIB :
 # Selectionner toutes les colonnes, nom compris jusqu'à derniere date 
 d <- ctrl_v()[-1,] # 1ere ligne est l'indice de gorupe
-AQLTools::ctrl_c(scale(d), col.names = FALSE)
+AQLTools::ctrl_c(scale(d), col.names = FALSE,memory=2^6)

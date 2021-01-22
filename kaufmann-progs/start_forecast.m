@@ -15,7 +15,7 @@ H=24; %H to evaluate forecasts
 Hf=freq*Ni; %forecast horizon 
 Mf=1000; %number of forecasts
 
-span=28;
+span=27;
 pool=1;
 Shrink=1;
 Unit_spec_var=1;
