@@ -1,4 +1,4 @@
-nom_dir <- "kaufmann-progs"
+nom_dir <- "programmes"
 m_files <- list.files(path = nom_dir,pattern = ".m$")
 m_files_m1 <- m_files[-grep("alain",m_files)]
 

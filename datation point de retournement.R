@@ -114,7 +114,7 @@ detect_tp <- function(x){
 		 ts_pic= ret_pic,
 		 ts_creux = ret_creux)
 }
-probMS <- read.csv("kaufmann-progs/probMS.csv",header = FALSE)
+probMS <- read.csv("programmes/probMS.csv",header = FALSE)
 proba <- ts(as.numeric(probMS[1,]), start = 1992,frequency = 4)
 proba
 detect_tp(probMS[1,])[1:2]
