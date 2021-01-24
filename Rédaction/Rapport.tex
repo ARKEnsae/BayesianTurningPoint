@@ -163,9 +163,10 @@ I^* = 3 := (I_{1t}=2,I_{2t}=1) \\
 I^* = 4 := (I_{1t}=2,I_{2t}=2) 
 \end{cases}\]
 
-En cas d'incertitude sur la structure dynamique des nos séries, c'est-à-dire sur l'identification des groupes 1 et 2, on peut introduire un paramètre de structure \(\rho^*\), caractérisant la structure entre les groupes.
+En cas d'incertitude sur la structure dynamique des nos séries, c'est-à-dire sur l'identification des groupes 1 et 2, on peut introduire un paramètre \(\rho^*\), caractérisant la structure entre les groupes.
 Il sera donc la réalisation d'une des \(K(K-1)\) permutations de \(\{1,2,0_{K-2}\}\).
 On considéra que \(\rho^*=1\) pour le groupe des séries coïncidentes, \(\rho^*=2\) pour celles qui mènent le cycle, et toute autre valeur renverra aux séries aux comportements autonomes.
+Le groupe d'appartenance de chaque série peut donc soit être basée sur un a priori (ce qui est fait dans notre cas) ou être estimée par une méthode statistique.
 
 \hypertarget{estimation-bayuxe9sienne}{%
 \subsection{Estimation bayésienne}\label{estimation-bayuxe9sienne}}
@@ -244,17 +245,17 @@ La figure \ref{fig:heterogeneite2} représente la moyenne des variances \(\frac{
 Cette fois-ci, on note une différence avec ce que donnaient les données autrichiennes.
 En effet, notre distribution est plus étirée et plus applatie que celle de l'article.
 Cela montre que la dispersion de l'erreur de variance est plus faible, ce qui s'explique sans doute par le processus de standardisation des séries préalables et par le fait que nous travaillons sur moins de séries.
-Le graphique \ref{etats} représente la moyenne inconditionnelle de chaque groupe de série dans les deux états, selon qu'ils sont en-dessous de la croissance moyenne ou au-dessus.
+Le graphique \ref{etats} représente la moyenne non-conditionnée de chaque groupe de série dans les deux états, selon qu'ils sont en-dessous de la croissance moyenne ou au-dessus.
 Cela permet d'illustrer que, contrairement à l'article, nos deux groupes de séries n'ont pas exactement le même comportement puisque les séries sont décalées les unes par rapport aux autres.
 
-\begin{figure}
+\begin{figure}[htb]
 \subfloat[Somme des coefficients de l'AR.\label{fig:heterogeneite1}]{\includegraphics[width=8cm]{img/fig2a.png}}
 \subfloat[$\sigma^2, \sigma^2/\lambda_i$.\label{fig:heterogeneite2}]{\includegraphics[width=8cm]{img/fig2b.png}}
 \caption{Hétérogénéité des séries - groupe 1 (trait plein) et 2 (pointillés).}
 \label{heterogeneite}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[htb]
 \begin{minipage}{.5\textwidth}
 \includegraphics[width=8cm]{img/fig3b.png}
 \end{minipage}
@@ -262,7 +263,7 @@ Cela permet d'illustrer que, contrairement à l'article, nos deux groupes de sé
 \begin{minipage}{.5\textwidth}
 \includegraphics[width=8cm]{img/fig3a.png}
 \end{minipage}
-\caption{Moyenne inconditionnelle dans les différents états.}
+\caption{Moyenne non-conditionnée dans les différents états.}
 \label{etats}
 \end{figure}
 
@@ -270,14 +271,14 @@ Le graphique \ref{pi-gamma} permet de juger la significativité de l'information
 Nous obtenons des conclusions légèrement différentes de celles de l'article : pour le groupe 1, la distribution \emph{a posteriori} des effets du PIB est éloignée de zéro, tandis que pour le groupe 2, on n'observe cela que pour les carnets de commandes (variable manuf-oscd).
 Cela s'explique par la façon dont la classification \emph{a priori} a été effectuée, selon que la série allait être en avance ou non sur le PIB.
 
-\begin{figure}
+\begin{figure}[htb]
 \centering
 \includegraphics[width=12cm]{img/fig4.png}
 \caption{$\pi(\gamma,\gamma_z|Y^T)$ - groupe 1 (trait plein) et 2 (pointillé).}
 \label{pi-gamma}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[htb]
 \begin{minipage}{.5\textwidth}
 \includegraphics[width=8cm]{img/fig5a.png}
 \end{minipage}
@@ -293,24 +294,25 @@ Le graphique \ref{graph3d} permet de se rendre compte de l'effet de la corrélat
 La courbe représente \(P(S = j|Z,Y^T) = \int P(S=j|Z,\gamma,\gamma_z)\pi(\gamma,\gamma_z|Y^T)\mathrm{d}\gamma\mathrm{d}\gamma_z\), la probabilité conditionnelle sur le PIB et le carnet de commande.
 Cette probabilité est la plus élevée pour les séries du groupe 1 qui sont fortement corrélées avec le PIB et corrélées positivement avec le carnet de commande, la corrélation avec le PIB semblant jouer un rôle plus important puisque la probabilité varie plus selon la valeur de cette dernière.
 Nous retrouvons ici la définition du premier groupe de variables qui contient celles qui sont coincidentes avec le cycle et donc corrélées avec le PIB.
-Pour le groupe 2, la valeur de la probabilité est maximale pour les séries fortement corrélées avec le carnet de commandes et cette variable semble être plus importante.
+Pour le groupe 2, la valeur de la probabilité est maximale pour les séries fortement corrélées avec le carnet de commandes et cette variable semble être plus importante (la corrélation avec le PIB n'ayant pas une grande influence).
 Cela conforte les analyses tirées du graphique \ref{pi-gamma}.
 
 La hauteur des lignes verticales du graphique \ref{graph3d} représente la probabilité \(P(S_i = j|Z_i,Y^T)\) a posteriori pour une série d'appartenir aux groupes 1 et 2.
 On remarque que dans la grande majorité des cas, cette probabilité a été mise à jour à 0 ou à 1, grâce à l'information supplémentaire obtenue.
-On peut vérifier la qualité de notre pré-classification grâce à cela : elle semble cohérente.
+On peut vérifier la qualité de notre pré-classification grâce à cela : elle semble cohérente (les séries classées dans le groupe coïncident ont une forte probabilité a posterori d'appartenir à ce groupe, et de même pour les séries classées dans le groupe avancé).
 
-\begin{figure}
+\begin{figure}[htb]
 \centering
 \includegraphics[width=15cm]{img/fig6.png}
-\caption{Probabilités \textit{a posteriori} $P(I_{kt}=1|Y^T)$ des séries coïncidantes $(S_i=1)$ et qui mènent le cycle $(S_i=2)$ sur la période 1992-2020 avec une classification a priori.}
-\label{retournements}
+\caption{Probabilités \textit{a posteriori} $P(I_{kt}=1|Y^T)$ des séries coïncidantes $(S_i=1)$ et qui mènent le cycle $(S_i=2)$ sur la période 1992-2020 avec une classification a priori.}\label{retournements}
+\footnotesize
+Note : la hauteur des lignes verticales représente la probabilité $P(S_i = j|Z_i,Y^T)$ a posteriori pour une série d'appartenir aux groupes 1 et 2.
 \end{figure}
 
 Le graphique \ref{retournements} est central puisqu'il epermet de repérer les points de retournement de notre cycle.
 Il représente les probabilités \(P(I_{k,t} = 1|Y^T)\) pour les séries des deux groupes, obtenues en moyennant les résultats sur \(M\) simulations.
 On remarque que les résultats semblent significatifs puisque les probabilités ont des valeurs très proches de 0 ou de 1 dans une majorité de cas.
-À partir de ce graphique, on définit le temps \(t\) comme un point de retournement si \(P(I_{k,t-1} = 1, I_{k,t} = 1 | Y^T) < 0,5\) et \(P(I_{k,t+1} = 1, I_{k,t+2} = 1 | Y^T) > 0,5\), c'est-à-dire une faible probalité de ne pas changer d'état à ce moment et, une fois qu'on a passé ce moment, une forte probabilité de rester dans le même état.
+À partir de ce graphique, on définit le temps \(t\) comme un point de retournement si \(P(I_{k,t-1} = 1, I_{k,t} = 1 | Y^T) < 0,5\) et \(P(I_{k,t+1} = 1, I_{k,t+2} = 1 | Y^T) > 0,5\) (pour un pic), \(k\) désignant le groupe coïncident, c'est-à-dire une faible probalité de ne pas changer d'état à ce moment et, une fois qu'on a passé ce moment, une forte probabilité de rester dans le même état. Inversement, on considère qu'il y a un creux lorsque \(P(I_{k,t-1} = 1, I_{k,t} = 1 | Y^T) > 0,5\) et \(P(I_{k,t+1} = 1, I_{k,t+2} = 1 | Y^T) < 0,5\).
 On peut donc repérer ici différents points de retournement qui correspondent à des réels évènements sur les marchés financiers en 1996 et 1999 (crise financière asiatique), 2002 et 2003 (krach boursier), 2009 (crise économique mondiale) ou encore 2013 (fin de la crise de 2008 avec encore des répercutions en France).
 Une fois des données disponibles pour la période entière du Covid-19, il sera intéressant de voir ce qui a été capté par notre modèle.
 
@@ -326,11 +328,14 @@ Le modèle permet cela puisqu'il peut être utilisé dans une optique de prévis
 L'idée est d'utiliser la densité prédictive \emph{a posteriori} \(\pi(I^*_{T+h}|Y^T) = \pi(I^*_{T+h|T})\) et de simuler récursivement les valeurs futures à partir de cela.
 En moyennisant nos résultats sur un grand nombre de simulations, on peut alors déterminer la probabilité d'être dans les différents états.
 
+Du fait du caractère non conjoncturel de la crise actuelle, nous n'avons pas effectué d'exercice de prévision qui ne pourrait détecter de manière efficace un point de retournement.
+
 \hypertarget{sec:indretFr}{%
 \subsection{Comparaison avec l'indicateur de retournement de l'Insee}\label{sec:indretFr}}
 
 Afin de pouvoir juger de l'efficacité de notre modèle, il peut être intéressant de le comparer à des méthodes déjà existantes et utilisées par les instituts nationaux de statistiques.
 En France, l'Insee publie un indicateur de retournement de conjoncture estimé à partir d'un modèle markovien à variables cachées sur des soldes d'opinion recodés en deux modalités (voir \cite{indretFR}).
+Cet indicateur est mensuel, contrairement à notre modèle bayésien qui se base sur des séries trimestrialisées.
 
 La valeur de cet indicateur correspond à la différence entre la probabilité que la phase conjoncturelle soit favorable et la probabilité qu'elle soit défavorable.
 Il évolue donc entre \(+1\) et \(-1\) : un point très proche de \(+1\) (respectivement de \(-1\)) signale que l'activité économique est en période de nette accélération (respectivement de nette décélération).
@@ -343,10 +348,16 @@ Les comptes nationaux étant encore provisoires à partir de 2018, la datation l
 
 \begin{figure}[h]
 {\centering
-\includegraphics[height=8cm]{img/fig6.png}
+\includegraphics[width=\textwidth]{img/indret.png}
 \caption{L’indicateur de retournement France, la datation des cycles de croissance et points de retournement déterminés par approche bayésienne.}\label{fig:indret}}
 \footnotesize
-Lecture : l’indicateur de retournement (courbe) est en zone favorable quand il est proche de 1, défavorable quand il est proche de -1. Il est ici confronté à une datation de référence des cycles de croissance : les zones grises correspondent à un ralentissement du PIB (par rapport à sa tendance) et les zones blanches à une accélération.
+Lecture : l’indicateur de retournement est en zone favorable quand il est proche de 1, défavorable quand il est proche de -1.
+Avec la méthode bayésienne présentée dans cette article, les points de retournement détectés sont les suivants :
+\begin{itemize}
+\item Creux : 1992T2, 1995T2, 1998T1, 2001T1, 2002T3, 2008T2, 2012T1;
+\item Pics : 1994T3, 1997T4, 2000T1, 2001T4, 2007T2, 2010T4, 2019T1.
+\end{itemize}
+Ces résultats sonts confrontés à une datation de référence des cycles de croissance : les zones noires correspondent à un ralentissement du PIB (par rapport à sa tendance) et les zones blanches à une accélération. La datation est provisoire à partir de 2018 (zone grise).
 \end{figure}
 
 Le graphique \ref{fig:indret}\ldots.
@@ -362,40 +373,44 @@ TODO.
 \section{Annexes}\label{annexes}}
 
 \begin{table}[h]{\centering
-   \begin{tabular}{ | c | l | c|}
+   \begin{tabular}{ | c | p{10cm} | c|c|}
      \hline
-     \textbf{Variable} & \textbf{Commentaire} & $S_i$ \\ \hline
-     YER & PIB & 1\\ \hline
-     MTR & Imports & 1 \\ \hline
-     PCR & Consommation & 1\\ \hline
-     ITR & Investissements & 1 \\ \hline
-     XTR & Exports & 1 \\ \hline
-     manuf-oscd & Enquête de conjoncture industrie -  carnet de commandes généraux & 2 \\ \hline
-     manuf-oscde & Enquête de conjoncture industrie - carnet de commandes étrangers & 2 \\ \hline
-     manuf-ossk & Enquête de conjoncture industrie - niveau des stocks de produits finis & 1\\ \hline
-     manuf-tppre & Enquête de conjoncture industrie - tendance passée de production & 1\\ \hline
-     manuf-tppre & Enquête de conjoncture industrie - tendance prévue de production & 2\\ \hline
-     manuf-pgp & Enquête de conjoncture industrie - perspectives générales & 2\\ \hline
-     ser-capa & Enquête de conjoncture services - évolution passée du chiffre d'affaires & 1\\ \hline
-     ser-capre & Enquête de conjoncture services - évolution prévue du chiffre d'affaires & 2\\ \hline
-     ser-dem & Enquête de conjoncture services - demande prévue  & 2\\ \hline
-     bat-jcc & Enquête de conjoncture bâtiment - niveau des carnets de commandes & 2 \\ \hline
-     bat-epa & Enquête de conjoncture bâtiment - évolutions passée des effectifs & 1\\ \hline
-     bat-tuc & Enquête de conjoncture bâtiment - taux d'utilisation des capacités de production & 1\\ \hline
-     bat-apa & Enquête de conjoncture bâtiment - évolution passée de l'activité & 1 \\ \hline
-     bat-apre & Enquête de conjoncture bâtiment -  évolution prévue de l'activité & 2\\ \hline
-     CLIMAT-FR & Climat des affaires France & 1 \\ \hline
-     CLIMAT-FR-EMPL & Climat de l'emploi France  & 1 \\ \hline
-     HIPC-FO & Indice des prix - nourriture & 1 \\ \hline
-     HICP-IG & Indice des prix - produits industriels & 1 \\ \hline
-     HICP-E & Indice des prix - énergie & 1 \\ \hline
-     HICP & Indice des prix & 1 \\ \hline
-     IPI-CZ & Indice de production industrielle - industrie manufacturière & 1 \\
+     \textbf{Variable} & \textbf{Commentaire} & $S_i$ &Trimestrialisation\\ \hline
+     YER & PIB & 1& $G_T$\\ \hline
+     MTR & Imports & 1& $G_T$ \\ \hline
+     PCR & Consommation & 1& $G_T$\\ \hline
+     ITR & Investissements & 1& $G_T$ \\ \hline
+     XTR & Exports & 1& $G_T$ \\ \hline
+     manuf-oscd & Enquête de conjoncture industrie -  carnet de commandes généraux & 2& $D_T$ \\ \hline
+     manuf-oscde & Enquête de conjoncture industrie - carnet de commandes étrangers & 2& $D_T$ \\ \hline
+     manuf-ossk & Enquête de conjoncture industrie - niveau des stocks de produits finis & 1& $D_T$\\ \hline
+     manuf-tppa & Enquête de conjoncture industrie - tendance passée de production & 1& $D_T$\\ \hline
+     manuf-tppre & Enquête de conjoncture industrie - tendance prévue de production & 2& $D_T$\\ \hline
+     manuf-pgp & Enquête de conjoncture industrie - perspectives générales & 2& $D_T$\\ \hline
+     ser-capa & Enquête de conjoncture services - évolution passée du chiffre d'affaires & 1& $D_T$\\ \hline
+     ser-capre & Enquête de conjoncture services - évolution prévue du chiffre d'affaires & 2& $D_T$\\ \hline
+     ser-dem & Enquête de conjoncture services - demande prévue  & 2& $D_T$\\ \hline
+     bat-jcc & Enquête de conjoncture bâtiment - niveau des carnets de commandes & 2& $D_T$ \\ \hline
+     bat-epa & Enquête de conjoncture bâtiment - évolutions passée des effectifs & 1& $D_T$\\ \hline
+     bat-tuc & Enquête de conjoncture bâtiment - taux d'utilisation des capacités de production & 1& $D_T$\\ \hline
+     bat-apa & Enquête de conjoncture bâtiment - évolution passée de l'activité & 1 & $D_T$\\ \hline
+     bat-apre & Enquête de conjoncture bâtiment -  évolution prévue de l'activité & 2& $D_T$\\ \hline
+     CLIMAT-FR & Climat des affaires France & 1 & $D_T$\\ \hline
+     CLIMAT-FR-EMPL & Climat de l'emploi France  & 1 & $D_T$\\ \hline
+     HIPC-FO & Indice des prix - nourriture & 1 & $G_T$\\ \hline
+     HICP-IG & Indice des prix - produits industriels & 1 & $G_T$\\ \hline
+     HICP-E & Indice des prix - énergie & 1 & $G_T$\\ \hline
+     HICP & Indice des prix & 1 & $G_T$\\ \hline
+     IPI-CZ & Indice de production industrielle - industrie manufacturière & 1& $G_T$ \\
      \hline
    \end{tabular}
    \caption{Variables utilisées dans l'analyse.}\label{tableau_var}}
   \footnotesize
-Note de lecture : $S_i=1$...
+Note de lecture : $S_i=1$ désigne les séries appartenant au groupe coïncident avec le cycle et $S_i=1$ celles appartenant au groupe en avance sur le cycle.
+
+À part les indicateurs de la comptabilité nationale et certains soldes d'opinion de l'enquête de ocnjoncture dans les services avant 2003, toutes les variables sont mensuelles. Pour les trimestrialiser on calcule leur moyenne sur le trimestre puis on calcule la différence entre deux trimestres ($D_T$) ou l'évolution trimestrielle ($G_T$).
+
+Toutes les séries sont centrées-normées.
 \end{table}
 
 \newpage
