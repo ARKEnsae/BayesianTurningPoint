@@ -296,7 +296,13 @@ Ces résultats sonts confrontés à une datation de référence des cycles de cr
 \end{figure}
 ```
 
-Le graphique \@ref(fig:indret).... 
+Le graphique \@ref(fig:indret) compare l'indicateur de retournement France, les points de retournement détectés par notre modèle et la datation de référence.
+Les points de retournement détectés sont généralement avancés par rapport à ceux de la datation officielle. 
+Par exemple un creux est détecté en 1995T2 alors que la datation officielle détecte ce point de retournement en 1997 (passage d'une phase de contraction à une phase d'accélération).
+L'indicateur de retournement semble plus proche de la datation officielle mais donne en revanche un signal très bruité à certaines dates.
+
+Le décalage dans la détection des points de retournement pourrait également s'expliquer par le faible nombre de séries utilisées dans notre application par rapport à l'article de \cite{Kaufmann} (environ 25 dans notre application contre une centaine)=.
+Plus d'investigations pourraient également être faites pour comprendre les contributions des différentes variables à la détection des points de retournement.
 
 # Conclusion
 
