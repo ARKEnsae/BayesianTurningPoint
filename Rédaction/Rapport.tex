@@ -306,7 +306,7 @@ On peut vérifier la qualité de notre pré-classification grâce à cela : elle
 \includegraphics[width=15cm]{img/fig6.png}
 \caption{Probabilités \textit{a posteriori} $P(I_{kt}=1|Y^T)$ des séries coïncidantes $(S_i=1)$ et qui mènent le cycle $(S_i=2)$ sur la période 1992-2020 avec une classification a priori.}\label{retournements}
 \footnotesize
-Note : la hauteur des lignes verticales représente la probabilité $P(S_i = j|Z_i,Y^T)$ a posteriori pour une série d'appartenir aux groupes 1 et 2.
+Note : la hauteur des lignes verticales représente la probabilité $P(S_i = j|Z_i,Y^T)$ a posteriori d'appartenir aux groupes 1 et 2.
 \end{figure}
 
 Le graphique \ref{retournements} est central puisqu'il epermet de repérer les points de retournement de notre cycle.
@@ -314,7 +314,16 @@ Il représente les probabilités \(P(I_{k,t} = 1|Y^T)\) pour les séries des deu
 On remarque que les résultats semblent significatifs puisque les probabilités ont des valeurs très proches de 0 ou de 1 dans une majorité de cas.
 À partir de ce graphique, on définit le temps \(t\) comme un point de retournement si \(P(I_{k,t-1} = 1, I_{k,t} = 1 | Y^T) < 0,5\) et \(P(I_{k,t+1} = 1, I_{k,t+2} = 1 | Y^T) > 0,5\) (pour un pic), \(k\) désignant le groupe coïncident, c'est-à-dire une faible probalité de ne pas changer d'état à ce moment et, une fois qu'on a passé ce moment, une forte probabilité de rester dans le même état. Inversement, on considère qu'il y a un creux lorsque \(P(I_{k,t-1} = 1, I_{k,t} = 1 | Y^T) > 0,5\) et \(P(I_{k,t+1} = 1, I_{k,t+2} = 1 | Y^T) < 0,5\).
 On peut donc repérer ici différents points de retournement qui correspondent à des réels évènements sur les marchés financiers en 1996 et 1999 (crise financière asiatique), 2002 et 2003 (krach boursier), 2009 (crise économique mondiale) ou encore 2013 (fin de la crise de 2008 avec encore des répercutions en France).
-Une fois des données disponibles pour la période entière du Covid-19, il sera intéressant de voir ce qui a été capté par notre modèle.
+
+Afin de juger de la robustesse de notre modèle, nous avons regardé ce qui changeait lorsque l'analyse commençait soit en 1992, soit en 2004 (car certaines données ont évolué à cette date), et quand elle se terminait soit en 2019, soit en 2020 (pour prendre en compte ou non les données Covid). Les résultats sont résumés dans le graphique \ref{fig:impactdate}. On remarque que la date de début de l'analyse semble avoir un rôle dans la détection de certains points de retournement. En effet, quand l'analyse commence en 2004, le point de retournement autour de 2013 ne semble plus présent, peut-être est-ce dû au caractère extrême de la crise de 2009. En revanche, que l'on termine l'analyse en 2019 ou en 2020, on note assez peu de différences, sauf pour la période qui précède la crise Covid, où les probabilités \emph{a posteriori} des années 2018-2019 dans l'analyse débutant en 1992.
+
+\begin{figure}[h]
+{\centering
+\includegraphics[width=\textwidth]{img/periodetotale}
+\caption{Probabilités \textit{a posteriori} $P(I_{kt}=1|Y^T)$ des séries coïncidantes $(S_i=1)$ et qui mènent le cycle $(S_i=2)$ sur différentes périodes avec une classification a priori.}\label{fig:impactdate}}
+\end{figure}
+
+Une fois des données disponibles entièrement pour la période entière du Covid-19, il sera intéressant de voir ce qui a été capté par notre modèle. De manière générale, une réflexion pourrait être menée sur la gestion des points extrêmes.
 
 \hypertarget{discussion}{%
 \section{Discussion}\label{discussion}}
@@ -365,13 +374,17 @@ Les points de retournement détectés sont généralement avancés par rapport �
 Par exemple un creux est détecté en 1995T2 alors que la datation officielle détecte ce point de retournement en 1997 (passage d'une phase de contraction à une phase d'accélération).
 L'indicateur de retournement semble plus proche de la datation officielle mais donne en revanche un signal très bruité à certaines dates.
 
-Le décalage dans la détection des points de retournement pourrait également s'expliquer par le faible nombre de séries utilisées dans notre application par rapport à l'article de \cite{Kaufmann} (environ 25 dans notre application contre une centaine)=.
+Le décalage dans la détection des points de retournement pourrait également s'expliquer par le faible nombre de séries utilisées dans notre application par rapport à l'article de \cite{Kaufmann} (environ 25 dans notre application contre une centaine).
 Plus d'investigations pourraient également être faites pour comprendre les contributions des différentes variables à la détection des points de retournement.
 
 \hypertarget{conclusion}{%
 \section{Conclusion}\label{conclusion}}
 
-TODO.
+Dans cet article, Sylvia Kauffman propose une méthode de détection des points de retournement qu'elle applique à des données autrichiennes. Le modèle est basé sur l'idée de regrouper les séries temporelles de même type en ayant l'idée qu'elles auront alors la même dynamique. Pour prendre en compte que certaines séries sont en avance sur le cycle économique, deux groupes sont principalement étudiées avec les séries en avance sur les cycles et celles qui lui sont coïncidentes, comme les PIB et ses composantes. Les distributions \emph{a posteriori} permettent ensuite de repérer les points de retournement.
+
+En appliquant cette méthode aux données françaises, nous avons ainsi pu repérer plusieurs points de retournements. Afin de juger de la qualité de nos résultats, nous les avons comparé avec l'indicateur de retournement produit par l'Insee, ce qui a mis en lumière un léger décalage de notre modèle, mais qui peuvent par exemple s'expliquer par le nombre de points utilisés pour calibrer le modèle. Les résultats sont tout de même apparus assez proches.
+
+En conclusion, l'analyse des cycles économiques revêt depuis plusieurs années un enjeu majeur. Dans le contexte de crise sanitaire tel que nous le connaissons, il est important d'améliorer notre connaissance de l'activité économique afin de pouvoir juger de la relance post-Covid le moment venu. Par ailleurs, pouvoir anticiper la détection de point de retournement ou d'inflexion de l'économie pourrait être un outil essentiel pour aider les politiques à calibrer au mieux les aides apportées aux entreprises.
 
 \newpage
 
