@@ -298,7 +298,7 @@ Les comptes nationaux étant encore provisoires à partir de 2018, la datation l
 \includegraphics[width=\textwidth]{img/indret.png}
 \caption{L’indicateur de retournement France, la datation des cycles de croissance et points de retournement déterminés par approche bayésienne.}\label{fig:indret}}
 \footnotesize
-\emph{%
+\emph{%%}
 Lecture : l’indicateur de retournement est en zone favorable quand il est proche de 1, défavorable quand il est proche de -1.
 Avec la méthode bayésienne présentée dans cette article, les points de retournement détectés sont les suivants :}
 \begin{itemize}
@@ -365,13 +365,13 @@ En conclusion, l'analyse des cycles économiques revêt depuis plusieurs années
    \end{tabular}
    \caption{Variables utilisées dans l'analyse.}\label{tableau_var}}
   \footnotesize
-\emph{%
+\emph{%%}
 Lecture : $S_i=1$ désigne les séries appartenant au groupe coïncident avec le cycle et $S_i=1$ celles appartenant au groupe en avance sur le cycle.}
 
-\emph{%
+\emph{%%}
 À part les indicateurs de la comptabilité nationale et certains soldes d'opinion de l'enquête de ocnjoncture dans les services avant 2003, toutes les variables sont mensuelles. Pour les trimestrialiser on calcule leur moyenne sur le trimestre puis on calcule la différence entre deux trimestres ($D_T$) ou l'évolution trimestrielle ($G_T$).}
 
-\emph{%
+\emph{%%}
 Toutes les séries sont centrées-normées.}
 \end{table}
 ```
