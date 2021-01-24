@@ -5,7 +5,7 @@
 % cal_end=[1986:2003];
 % ifig=1;
 % group=0; %(1) sort beta^G, (2) sort beta^R, (3) sort beta^G-beta^R, (4) sort etaMS_jj, (5) sort istar
-span=27;
+span=28;
 pool=1;
 shrink=1;
 rest_diff=0;

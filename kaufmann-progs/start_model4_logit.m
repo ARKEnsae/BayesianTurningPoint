@@ -34,7 +34,7 @@ shrink=1;
 true=0; %flag to start with true values of I_t and of parameters (if 1), to start with general values (if 0),
 % to start with mean value of initial estimation (if 2);
 
-span=27;
+span=28;
 maxlag=4; %maximum endogenous or exogenous variables
 
 for cal_beg=[date_deb];
