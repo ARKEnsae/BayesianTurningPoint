@@ -105,11 +105,14 @@ logo=\bcloupe,barre=none,couleurBord=blue!60!green,nobreak = #1]{ {\sc \textbf{E
 \maketitle
 
 
-\begin{textblock*}{\textwidth}(0cm,-7.5cm)
-\begin{center}
-\includegraphics[height=2.5cm]{img/LOGO-ENSAE.png}
-\end{center}
-\end{textblock*}
+\input{logo.tex}
+
+{
+\hypersetup{linkcolor=black}
+\setcounter{tocdepth}{2}
+\tableofcontents
+}
+\newpage
 
 \hypertarget{introduction}{%
 \section{Introduction}\label{introduction}}
@@ -387,9 +390,10 @@ En appliquant cette méthode aux données françaises, nous avons ainsi pu repé
 En conclusion, l'analyse des cycles économiques revêt depuis plusieurs années un enjeu majeur. Dans le contexte de crise sanitaire tel que nous le connaissons, il est important d'améliorer notre connaissance de l'activité économique afin de pouvoir juger de la relance post-Covid le moment venu. Par ailleurs, pouvoir anticiper la détection de point de retournement ou d'inflexion de l'économie pourrait être un outil essentiel pour aider les politiques à calibrer au mieux les aides apportées aux entreprises.
 
 \newpage
+\appendix
 
-\hypertarget{annexes}{%
-\section{Annexes}\label{annexes}}
+\hypertarget{annexe}{%
+\section{Annexe}\label{annexe}}
 
 \begin{table}[h]{\centering
    \begin{tabular}{ | c | p{10cm} | c|c|}
