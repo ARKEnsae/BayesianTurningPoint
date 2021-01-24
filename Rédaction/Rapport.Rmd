@@ -207,6 +207,8 @@ Cela s'explique par la façon dont la classification *a priori* a été effectu�
 \includegraphics[width=12cm]{img/fig4.png}
 \caption{$\pi(\gamma,\gamma_z|Y^T)$ - groupe 1 (trait plein) et 2 (pointillé).}
 \label{pi-gamma}
+\footnotesize
+\emph{Note : GDP = PIB et manuf-oscd = solde d'opinion sur le niveau des carnets de commandes}.
 \end{figure}
 ```
 ```{=tex}
@@ -220,6 +222,8 @@ Cela s'explique par la façon dont la classification *a priori* a été effectu�
 \end{minipage}
 \caption{Probabilités \textit{a priori} et \textit{a posteriori} $P(S = j|Z,Y^T)$ et $P(S_i = j|Z_i,Y^T)$.}
 \label{graph3d}
+\footnotesize
+\emph{Note : GDP = PIB et manuf-oscd = solde d'opinion sur le niveau des carnets de commandes}.
 \end{figure}
 ```
 Le graphique \@ref(graph3d) permet de se rendre compte de l'effet de la corrélation avec le PIB et le carnet de commandes entre les groupes 1 (à gauche) et 2 (à droite).
@@ -294,13 +298,14 @@ Les comptes nationaux étant encore provisoires à partir de 2018, la datation l
 \includegraphics[width=\textwidth]{img/indret.png}
 \caption{L’indicateur de retournement France, la datation des cycles de croissance et points de retournement déterminés par approche bayésienne.}\label{fig:indret}}
 \footnotesize
+\emph{%
 Lecture : l’indicateur de retournement est en zone favorable quand il est proche de 1, défavorable quand il est proche de -1.
-Avec la méthode bayésienne présentée dans cette article, les points de retournement détectés sont les suivants :
+Avec la méthode bayésienne présentée dans cette article, les points de retournement détectés sont les suivants :}
 \begin{itemize}
-\item Creux : 1992T2, 1995T2, 1998T1, 2001T1, 2002T3, 2008T2, 2012T1 ;
-\item Pics : 1994T3, 1997T4, 2000T1, 2001T4, 2007T2, 2010T4, 2019T1.
+\item \emph{Creux : 1992T2, 1995T2, 1998T1, 2001T1, 2002T3, 2008T2, 2012T1 ;}
+\item \emph{Pics : 1994T3, 1997T4, 2000T1, 2001T4, 2007T2, 2010T4, 2019T1.}
 \end{itemize}
-Ces résultats sonts confrontés à une datation de référence des cycles de croissance : les zones noires correspondent à un ralentissement du PIB (par rapport à sa tendance) et les zones blanches à une accélération. La datation est provisoire à partir de 2018 (zone grise).
+\emph{Ces résultats sonts confrontés à une datation de référence des cycles de croissance : les zones noires correspondent à un ralentissement du PIB (par rapport à sa tendance) et les zones blanches à une accélération. La datation est provisoire à partir de 2018 (zone grise).}
 \end{figure}
 ```
 
@@ -360,11 +365,14 @@ En conclusion, l'analyse des cycles économiques revêt depuis plusieurs années
    \end{tabular}
    \caption{Variables utilisées dans l'analyse.}\label{tableau_var}}
   \footnotesize
-Note de lecture : $S_i=1$ désigne les séries appartenant au groupe coïncident avec le cycle et $S_i=1$ celles appartenant au groupe en avance sur le cycle.
+\emph{%
+Lecture : $S_i=1$ désigne les séries appartenant au groupe coïncident avec le cycle et $S_i=1$ celles appartenant au groupe en avance sur le cycle.}
 
-À part les indicateurs de la comptabilité nationale et certains soldes d'opinion de l'enquête de ocnjoncture dans les services avant 2003, toutes les variables sont mensuelles. Pour les trimestrialiser on calcule leur moyenne sur le trimestre puis on calcule la différence entre deux trimestres ($D_T$) ou l'évolution trimestrielle ($G_T$).
+\emph{%
+À part les indicateurs de la comptabilité nationale et certains soldes d'opinion de l'enquête de ocnjoncture dans les services avant 2003, toutes les variables sont mensuelles. Pour les trimestrialiser on calcule leur moyenne sur le trimestre puis on calcule la différence entre deux trimestres ($D_T$) ou l'évolution trimestrielle ($G_T$).}
 
-Toutes les séries sont centrées-normées.
+\emph{%
+Toutes les séries sont centrées-normées.}
 \end{table}
 ```
 \newpage
