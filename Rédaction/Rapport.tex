@@ -112,22 +112,25 @@ logo=\bcloupe,barre=none,couleurBord=blue!60!green,nobreak = #1]{ {\sc \textbf{E
 \setcounter{tocdepth}{2}
 \tableofcontents
 }
+\vfill
+
+L'ensemble du projet est disponible à l'adresse \url{https://github.com/ARKEnsae/BayesianTurningPoint}.
+
 \newpage
 
 \hypertarget{introduction}{%
 \section{Introduction}\label{introduction}}
 
 Dans son ouvrage \emph{Les vagues longues de la conjoncture}, Nikolai Kondratiev mettait en évidence l'existence de cycles économiques formés de deux périodes, une phase ascendante puis une phase descendante.
-Bien que contestée et complétée par la suite par d'autres analyses, cette découverte des cycles économiques a très vite mené les chercheurs a essayé de savoir dans quelle phase l'économie se trouvait et, de fait, savoir déterminer et prévoir le moment le cycle s'inverse est un enjeu majeur.
-C'est sur ce sujet que nous allons travaillé ici, à partir de l'article intitulé ``Dating and forecasting turning points by Bayesian clustering with dynamic structure: a suggestion with an application to Austrian data. Journal of Applied Econometrics'' \cite{Kaufmann}.
+Bien que contestée et complétée par la suite par d'autres analyses, cette découverte des cycles économiques a très vite mené les chercheurs à essayer de savoir dans quelle phase l'économie se trouvait et, de fait, savoir déterminer et prévoir le moment le cycle s'inverse est un enjeu majeur.
+C'est sur ce sujet que nous allons travailler ici, à partir de l'article intitulé ``Dating and forecasting turning points by Bayesian clustering with dynamic structure: a suggestion with an application to Austrian data. Journal of Applied Econometrics'' \cite{Kaufmann}.
 
 Ce papier poursuit un premier travail introduit par \cite{FruhwirthKaufmann}.
-L'idée est de travail sur un ensemble de plusieurs séries temporelles que l'on va essayer de regrouper.
-Nous chercherons à les regrouper au mieux afin d'étudier ensemble des séries qui possèdent la même dynamique.
+L'idée est de travailler sur un ensemble de plusieurs séries temporelles que l'on va essayer de regrouper en fonction de leur dynamiquee.
 Nous travaillerons alors sur deux périodes, selon que l'on est inférieur ou supérieur à la moyenne de croissance et on cherchera à déterminer le point de retournement dans le cycle.
 
-Dans ce travail, nous commencerons par détailler les spécifications théoriques du modèle et l'estimation bayésienne associée.
-Nous tenterons ensuite d'appliquer cette méthode à la manière de ce qui a été fait par \cite{Kaufmann} mais sur des données françaises.
+Dans ce travail, nous commençons par détailler les spécifications théoriques du modèle et l'estimation bayésienne associée.
+Nous appliquons cette méthode à la manière de ce qui a été fait par \cite{Kaufmann} mais sur des données françaises.
 
 \hypertarget{cadre-thuxe9orique}{%
 \section{Cadre théorique}\label{cadre-thuxe9orique}}
@@ -141,10 +144,10 @@ Nous supposerons que nos séries suivent des processus autorégressifs, c'est-à
 L'indice \(I_{it}\) précisera à quel moment du cycle nous nous trouverons, ainsi on aura \(I_{it} \in \{1,2\}\).
 
 Théoriquement, les séries étudiées sont supposées être indépendantes les unes des autres.
-En pratique, cependant, il existe des séries qui suivent des évolutions proches et il peut donc être utile d'exploiter cette information pour notre estimation.
+Cependant, en pratique, il existe des séries qui suivent des évolutions proches et il peut donc être utile d'exploiter cette information pour notre estimation.
 Nous allons donc chercher à créer des groupes de séries de manière intelligente.
-Dans ce but, nous introduisons la variable \(S_i \in \{1, \dots, K \}\) qui indique dans quel groupe est classée la variable \(i\).
-Dans la suite, nous supposons que toutes les séries d'un groupe vons avoir des paramètres distribués selon une même loi mais différente selon la position dans le cycle :
+Pour cela, nous introduisons la variable \(S_i \in \{1, \dots, K \}\) qui indique dans quel groupe est classée la variable \(i\).
+Dans la suite, nous supposons que toutes les séries d'un groupe vont avoir des paramètres distribués selon une même loi mais différente selon la position dans le cycle :
 
 \[ \mu_{I_{S_i,t}}^i \sim \begin{cases}
 \mathcal{N}(\mu_1^k,q_1^k) \text{ si } S_i = k \text{ et } I_{kt} = 1\\
@@ -183,15 +186,17 @@ Enfin, nous notons \(\lambda^N = \{\lambda_1, \dots, \lambda_N\}\) qui regroupe 
 
 Par commodité, nous noterons également \(\theta=(\mu_1^1, \mu_2^1, \dots, \mu_1^K, \mu_2^K, \phi^1, \dots, \phi^K, Q^1, \dots, Q^K, \sigma^2, \xi^*, \xi^{\rho^*(k)=0},\gamma, \gamma_z)\) où \(Q^k = \begin{pmatrix} q_1^k & 0 & 0 \\ 0 & q_2^k & 0 \\ 0 & 0 & Q_{\phi}^k \end{pmatrix}\) représente l'hétérogénéité intra-groupe, \(\xi^{\rho^*(k)=0} = \{\xi_{11}^k,\xi_{12}^k,\xi_{21}^k,\xi_{22}^k\}\), \(\gamma = (\gamma_1, \dots, \gamma_{K-1})\) et \(\gamma_z = (\gamma_{z,1},\dots, \gamma_{z,K-1})\).
 
-Nous pouvons passons à l'estimation par MCMC pour obtenir une posteriori sur le paramètre \(\psi = (\theta,S^N,I^T,\lambda^N,\rho^*)\).
+Nous pouvons passer à l'estimation par MCMC pour obtenir une posteriori sur le paramètre \(\psi = (\theta,S^N,I^T,\lambda^N,\rho^*)\).
 
 \hypertarget{estimation-par-mcmc}{%
 \subsubsection{Estimation par MCMC}\label{estimation-par-mcmc}}
 
 Nous partons de \(\pi(\psi|Y^T) \propto L(Y^T|\psi)\pi(\psi)\) où \(L(Y^T|\psi)\) est la vraisemblance, que l'on peut réécrire.
-En effet, \(L(Y^T|\psi) = \prod\limits_{t=p+1}^T\prod\limits_{i=1}^Nf(y_{i,t}|y_i^{t-1},\mu_{I_{S_i,t}}^{S_i},\phi^{S_i},Q^{S_i},\lambda_i,\sigma^2)\), avec \[f(y_{i,t}|y_i^{t-1},\mu_{I_{S_i,t}}^{S_i},\phi^{S_i},Q^{S_i},\lambda_i,\sigma^2)=\displaystyle\frac{1}{\sqrt{2\pi\nu_{it}^{S_i}}}\exp\big( -\displaystyle\frac{1}{2\nu_{it}^{S_i}}\big(y_{it} - \mu_{I_{S_i,t}}^{S_i} - \sum\limits_{j=1}^p \phi_j^{S_i}y_{i,t-1} \big)^2\big)\] Avec \(y_{it} = X^{S_i}_{it}\beta^{S_i} + \epsilon_{it}^*, \text{ où } \epsilon_{it}^*\sim N(0,\nu_{it}^{S_i}), X^{S_i}_{it} = (D_{1t}^{I(S_i)},D_{2t}^{I(S_i)},y_{i,t-1}, \dots, y_{i,t-p}),D_{jt}^{I(S_i)}=\mathbb{1}(I_{S_i,t}=j), \beta^{S_i} = (\mu_1^{S_i},\mu_2^{S_i}, \phi^{S_i}).\), et \(\nu_{it}^{S_i} = X^{S_i}_{it}Q^{S_i}X^{S_i'}_{it} + \displaystyle\frac{\sigma^2}{\lambda_i}\).
+En effet, \(L(Y^T|\psi) = \prod\limits_{t=p+1}^T\prod\limits_{i=1}^Nf(y_{i,t}|y_i^{t-1},\mu_{I_{S_i,t}}^{S_i},\phi^{S_i},Q^{S_i},\lambda_i,\sigma^2)\), avec
+\[f(y_{i,t}|y_i^{t-1},\mu_{I_{S_i,t}}^{S_i},\phi^{S_i},Q^{S_i},\lambda_i,\sigma^2)=\displaystyle\frac{1}{\sqrt{2\pi\nu_{it}^{S_i}}}\exp\big( -\displaystyle\frac{1}{2\nu_{it}^{S_i}}\big(y_{it} - \mu_{I_{S_i,t}}^{S_i} - \sum\limits_{j=1}^p \phi_j^{S_i}y_{i,t-1} \big)^2\big)\]
+Avec \(y_{it} = X^{S_i}_{it}\beta^{S_i} + \epsilon_{it}^*, \text{ où } \epsilon_{it}^*\sim N(0,\nu_{it}^{S_i}), X^{S_i}_{it} = (D_{1t}^{I(S_i)},D_{2t}^{I(S_i)},y_{i,t-1}, \dots, y_{i,t-p}),D_{jt}^{I(S_i)}=\mathbb{1}(I_{S_i,t}=j), \beta^{S_i} = (\mu_1^{S_i},\mu_2^{S_i}, \phi^{S_i}).\), et \(\nu_{it}^{S_i} = X^{S_i}_{it}Q^{S_i}X^{S_i'}_{it} + \displaystyle\frac{\sigma^2}{\lambda_i}\).
 
-Nous supposerons dans la suite que la structure \(\rho^*\) est connue (déterminée par d'autres méthodes), nous pouvons alors réécrire la distribution a priori sur \(\phi\) ainsi :
+Nous supposerons dans la suite que la structure \(\rho^*\) est connue (déterminée par un a priori), nous pouvons alors réécrire la distribution a priori sur \(\phi\) ainsi :
 
 \[\pi(\phi) = \pi(I^{*T}|\rho^*, \xi^*) \prod \limits_{\rho^*(k)=0} \pi(I^{T}_k|\rho^*,\xi^*)\pi(S^N|\gamma, \gamma_z,Z^N)\pi(\lambda^N)\pi(\theta)\]
 
@@ -243,28 +248,28 @@ Nous avons adapté les programmes de \cite{Kaufmann} à nos données et nous ana
 Le modèle étudié ici se caractérise entre autres par la prise en compte de la spécification de l'hétérogénéité entre séries.
 Ceci est illustré par le graphique \ref{heterogeneite}.
 La figure \ref{fig:heterogeneite1} représente la moyenne de la somme des paramètres autorégressifs.
-Dans l'article de \cite{Kaufmann}, l'importance de la prise en compte de l'hétérogénité était observée, ce qui semble s'observer sur les données française.
+Comme dans l'article de \cite{Kaufmann}, sur les données français, nous pouvons noter l'importance de la prise en compte de l'hétérogénité.
 La figure \ref{fig:heterogeneite2} représente la moyenne des variances \(\frac{\sigma^2}{\lambda_i}\).
 Cette fois-ci, on note une différence avec ce que donnaient les données autrichiennes.
 En effet, notre distribution est plus étirée et plus applatie que celle de l'article.
 Cela montre que la dispersion de l'erreur de variance est plus faible, ce qui s'explique sans doute par le processus de standardisation des séries préalables et par le fait que nous travaillons sur moins de séries.
-Le graphique \ref{etats} représente la moyenne non-conditionnée de chaque groupe de série dans les deux états, selon qu'ils sont en-dessous de la croissance moyenne ou au-dessus.
+Le graphique \ref{etats} représente la moyenne non-conditionnée de chaque groupe de série dans les deux états, selon qu'elles sont au-dessous ou au-dessus de la croissance moyenne.
 Cela permet d'illustrer que, contrairement à l'article, nos deux groupes de séries n'ont pas exactement le même comportement puisque les séries sont décalées les unes par rapport aux autres.
 
 \begin{figure}[htb]
-\subfloat[Somme des coefficients de l'AR.\label{fig:heterogeneite1}]{\includegraphics[width=8cm]{img/fig2a.png}}
-\subfloat[$\sigma^2, \sigma^2/\lambda_i$.\label{fig:heterogeneite2}]{\includegraphics[width=8cm]{img/fig2b.png}}
+\subfloat[Somme des coefficients de l'AR.\label{fig:heterogeneite1}]{\includegraphics[width=7cm]{img/fig2a.png}}
+\subfloat[$\sigma^2, \sigma^2/\lambda_i$.\label{fig:heterogeneite2}]{\includegraphics[width=7cm]{img/fig2b.png}}
 \caption{Hétérogénéité des séries - groupe 1 (trait plein) et 2 (pointillés).}
 \label{heterogeneite}
 \end{figure}
 
 \begin{figure}[htb]
 \begin{minipage}{.5\textwidth}
-\includegraphics[width=8cm]{img/fig3b.png}
+\includegraphics[width=7cm]{img/fig3b.png}
 \end{minipage}
 \hfill
 \begin{minipage}{.5\textwidth}
-\includegraphics[width=8cm]{img/fig3a.png}
+\includegraphics[width=7cm]{img/fig3a.png}
 \end{minipage}
 \caption{Moyenne non-conditionnée dans les différents états.}
 \label{etats}
@@ -283,21 +288,16 @@ Cela s'explique par la façon dont la classification \emph{a priori} a été eff
 \emph{Note : GDP = PIB et manuf-oscd = solde d'opinion sur le niveau des carnets de commandes}.
 \end{figure}
 
-\begin{figure}[htb]
-\begin{minipage}{.5\textwidth}
-\includegraphics[width=8cm]{img/fig5a.png}
-\end{minipage}
-\hfill
-\begin{minipage}{.5\textwidth}
-\includegraphics[width=8cm]{img/fig5b.png}
-\end{minipage}
+\begin{figure}[htb] \centering
+\subfloat[Groupe 1.\label{fig:corgr1}]{\includegraphics[width=7cm]{img/fig5a.png}}
+\subfloat[Groupe 2.\label{fig:corgr2}]{\includegraphics[width=7cm]{img/fig5b.png}}
 \caption{Probabilités \textit{a priori} et \textit{a posteriori} $P(S = j|Z,Y^T)$ et $P(S_i = j|Z_i,Y^T)$.}
 \label{graph3d}
 \footnotesize
 \emph{Note : GDP = PIB et manuf-oscd = solde d'opinion sur le niveau des carnets de commandes}.
 \end{figure}
 
-Le graphique \ref{graph3d} permet de se rendre compte de l'effet de la corrélation avec le PIB et le carnet de commandes entre les groupes 1 (à gauche) et 2 (à droite).
+Le graphique \ref{graph3d} permet de visualiser l'effet de la corrélation avec le PIB et le carnet de commandes entre les groupes~1 (figure \ref{fig:corgr1}) et 2 (figure \ref{fig:corgr2}).
 La courbe représente \(P(S = j|Z,Y^T) = \int P(S=j|Z,\gamma,\gamma_z)\pi(\gamma,\gamma_z|Y^T)\mathrm{d}\gamma\mathrm{d}\gamma_z\), la probabilité conditionnelle sur le PIB et le carnet de commande.
 Cette probabilité est la plus élevée pour les séries du groupe 1 qui sont fortement corrélées avec le PIB et corrélées positivement avec le carnet de commande, la corrélation avec le PIB semblant jouer un rôle plus important puisque la probabilité varie plus selon la valeur de cette dernière.
 Nous retrouvons ici la définition du premier groupe de variables qui contient celles qui sont coincidentes avec le cycle et donc corrélées avec le PIB.
@@ -305,8 +305,8 @@ Pour le groupe 2, la valeur de la probabilité est maximale pour les séries for
 Cela conforte les analyses tirées du graphique \ref{pi-gamma}.
 
 La hauteur des lignes verticales du graphique \ref{graph3d} représente la probabilité \(P(S_i = j|Z_i,Y^T)\) a posteriori pour une série d'appartenir aux groupes 1 et 2.
-On remarque que dans la grande majorité des cas, cette probabilité a été mise à jour à 0 ou à 1, grâce à l'information supplémentaire obtenue.
-On peut vérifier la qualité de notre pré-classification grâce à cela : elle semble cohérente (les séries classées dans le groupe coïncident ont une forte probabilité a posterori d'appartenir à ce groupe, et de même pour les séries classées dans le groupe avancé).
+Dans la grande majorité des cas, cette probabilité a été mise à jour à 0 ou à 1, grâce à l'information supplémentaire obtenue.
+Cela permet de vérifier la qualité de notre pré-classification : elle semble cohérente car les séries classées dans le groupe coïncident ont une forte probabilité a posterori d'appartenir à ce groupe, et de même pour les séries classées dans le groupe avancé.
 
 \begin{figure}[htb]
 \centering
@@ -316,13 +316,16 @@ On peut vérifier la qualité de notre pré-classification grâce à cela : elle
 Note : la hauteur des lignes verticales représente la probabilité $P(S_i = j|Z_i,Y^T)$ a posteriori d'appartenir aux groupes 1 et 2.
 \end{figure}
 
-Le graphique \ref{retournements} est central puisqu'il epermet de repérer les points de retournement de notre cycle.
+Le graphique \ref{retournements} est central puisqu'il permet de repérer les points de retournement de notre cycle.
 Il représente les probabilités \(P(I_{k,t} = 1|Y^T)\) pour les séries des deux groupes, obtenues en moyennant les résultats sur \(M\) simulations.
-On remarque que les résultats semblent significatifs puisque les probabilités ont des valeurs très proches de 0 ou de 1 dans une majorité de cas.
-À partir de ce graphique, on définit le temps \(t\) comme un point de retournement si \(P(I_{k,t-1} = 1, I_{k,t} = 1 | Y^T) < 0,5\) et \(P(I_{k,t+1} = 1, I_{k,t+2} = 1 | Y^T) > 0,5\) (pour un pic), \(k\) désignant le groupe coïncident, c'est-à-dire une faible probalité de ne pas changer d'état à ce moment et, une fois qu'on a passé ce moment, une forte probabilité de rester dans le même état. Inversement, on considère qu'il y a un creux lorsque \(P(I_{k,t-1} = 1, I_{k,t} = 1 | Y^T) > 0,5\) et \(P(I_{k,t+1} = 1, I_{k,t+2} = 1 | Y^T) < 0,5\).
+Les résultats semblent significatifs puisque les probabilités ont des valeurs très proches de 0 ou de~1 dans une majorité de cas.
+À partir de ce graphique, on définit la date \(t\) comme un point de retournement si \(P(I_{k,t-1} = 1, I_{k,t} = 1 | Y^T) < 0,5\) et \(P(I_{k,t+1} = 1, I_{k,t+2} = 1 | Y^T) > 0,5\) (pour un pic), \(k\) désignant le groupe coïncident, c'est-à-dire une faible probalité de ne pas changer d'état à ce moment et, une fois qu'on a passé ce moment, une forte probabilité de rester dans le même état. Inversement, on considère qu'il y a un creux lorsque \(P(I_{k,t-1} = 1, I_{k,t} = 1 | Y^T) > 0,5\) et \(P(I_{k,t+1} = 1, I_{k,t+2} = 1 | Y^T) < 0,5\).
 On peut donc repérer ici différents points de retournement qui correspondent à des réels évènements sur les marchés financiers en 1996 et 1999 (crise financière asiatique), 2002 et 2003 (krach boursier), 2009 (crise économique mondiale) ou encore 2013 (fin de la crise de 2008 avec encore des répercutions en France).
 
-Afin de juger de la robustesse de notre modèle, nous avons regardé ce qui changeait lorsque l'analyse commençait soit en 1992, soit en 2004 (car certaines données ont évolué à cette date), et quand elle se terminait soit en 2019, soit en 2020 (pour prendre en compte ou non les données Covid). Les résultats sont résumés dans le graphique \ref{fig:impactdate}. On remarque que la date de début de l'analyse semble avoir un rôle dans la détection de certains points de retournement. En effet, quand l'analyse commence en 2004, le point de retournement autour de 2013 ne semble plus présent, peut-être est-ce dû au caractère extrême de la crise de 2009. En revanche, que l'on termine l'analyse en 2019 ou en 2020, on note assez peu de différences, sauf pour la période qui précède la crise Covid, où les probabilités \emph{a posteriori} des années 2018-2019 dans l'analyse débutant en 1992.
+Afin de juger de la robustesse de notre modèle, nous avons regardé ce qui changeait lorsque l'analyse commençait soit en 1992, soit en 2004\footnote{
+  Car certains soldes d'opinion dans l'enquêtes de conjoncture dans les services étaient trimestriels avant 2004 et mensuels après 2004: la dynamique de ces variables ont donc pu changer à cette date.}, et quand elle se terminait soit en 2019, soit en 2020 (pour prendre en compte ou non les données de la crise du Covid-19). Les résultats sont résumés dans le graphique \ref{fig:impactdate}.
+On remarque que la date de début de l'analyse semble avoir un rôle dans la détection de certains points de retournement. En effet, quand l'analyse commence en 2004, le point de retournement autour de 2013 n'est plus détecté, peut-être est-ce dû au à l'influence de la crise de 2009 sur les estimations des modèles autorégressifs.
+En revanche, que l'on termine l'analyse en 2019 ou en 2020, on note assez peu de différences : la crise du Covid-19, bien qu'ayant une influence extrême sur les séries, ne change pas le diagnostic sur les estimations passées des points de retournement.
 
 \begin{figure}[h]
 {\centering
@@ -330,7 +333,8 @@ Afin de juger de la robustesse de notre modèle, nous avons regardé ce qui chan
 \caption{Probabilités \textit{a posteriori} $P(I_{kt}=1|Y^T)$ des séries coïncidantes $(S_i=1)$ et qui mènent le cycle $(S_i=2)$ sur différentes périodes avec une classification a priori.}\label{fig:impactdate}}
 \end{figure}
 
-Une fois des données disponibles entièrement pour la période entière du Covid-19, il sera intéressant de voir ce qui a été capté par notre modèle. De manière générale, une réflexion pourrait être menée sur la gestion des points extrêmes.
+Une fois des données disponibles entièrement pour la période entière du Covid-19, il sera intéressant de voir ce qui a été capté par notre modèle.
+De manière générale, une réflexion pourrait être menée sur la gestion des points des points atypiques.
 
 \hypertarget{discussion}{%
 \section{Discussion}\label{discussion}}
@@ -349,7 +353,7 @@ Du fait du caractère non conjoncturel de la crise actuelle, nous n'avons pas ef
 \hypertarget{sec:indretFr}{%
 \subsection{Comparaison avec l'indicateur de retournement de l'Insee}\label{sec:indretFr}}
 
-Afin de pouvoir juger de l'efficacité de notre modèle, il peut être intéressant de le comparer à des méthodes déjà existantes et utilisées par les instituts nationaux de statistiques.
+Afin de pouvoir juger de l'efficacité de notre modèle, il est intéressant de le comparer à des méthodes déjà existantes et utilisées par les instituts nationaux de statistiques.
 En France, l'Insee publie un indicateur de retournement de conjoncture estimé à partir d'un modèle markovien à variables cachées sur des soldes d'opinion recodés en deux modalités (voir \cite{indretFR}).
 Cet indicateur est mensuel, contrairement à notre modèle bayésien qui se base sur des séries trimestrialisées.
 
@@ -367,8 +371,7 @@ Les comptes nationaux étant encore provisoires à partir de 2018, la datation l
 \includegraphics[width=\textwidth]{img/indret.png}
 \caption{L’indicateur de retournement France, la datation des cycles de croissance et points de retournement déterminés par approche bayésienne.}\label{fig:indret}}
 \footnotesize
-\emph{%%}
-Lecture : l’indicateur de retournement est en zone favorable quand il est proche de 1, défavorable quand il est proche de -1.
+\emph{Lecture : l’indicateur de retournement est en zone favorable quand il est proche de 1, défavorable quand il est proche de -1.
 Avec la méthode bayésienne présentée dans cette article, les points de retournement détectés sont les suivants :}
 \begin{itemize}
 \item \emph{Creux : 1992T2, 1995T2, 1998T1, 2001T1, 2002T3, 2008T2, 2012T1 ;}
@@ -388,11 +391,22 @@ Plus d'investigations pourraient également être faites pour comprendre les con
 \hypertarget{conclusion}{%
 \section{Conclusion}\label{conclusion}}
 
-Dans cet article, Sylvia Kauffman propose une méthode de détection des points de retournement qu'elle applique à des données autrichiennes. Le modèle est basé sur l'idée de regrouper les séries temporelles de même type en ayant l'idée qu'elles auront alors la même dynamique. Pour prendre en compte que certaines séries sont en avance sur le cycle économique, deux groupes sont principalement étudiées avec les séries en avance sur les cycles et celles qui lui sont coïncidentes, comme les PIB et ses composantes. Les distributions \emph{a posteriori} permettent ensuite de repérer les points de retournement.
+Dans \cite{Kaufmann}, l'auteure propose une méthode de détection des points de retournement qu'elle applique à des données autrichiennes.
+Le modèle est basé sur l'idée de regrouper les séries temporelles de même type en ayant l'idée qu'elles auront alors la même dynamique.
+Pour prendre en compte que certaines séries sont en avance sur le cycle économique, deux groupes sont principalement étudiées avec les séries en avance sur les cycles et celles qui lui sont coïncidentes, comme les PIB et ses composantes.
+Les distributions \emph{a posteriori} permettent ensuite de repérer les points de retournement.
 
-En appliquant cette méthode aux données françaises, nous avons ainsi pu repérer plusieurs points de retournements. Afin de juger de la qualité de nos résultats, nous les avons comparé avec l'indicateur de retournement produit par l'Insee, ce qui a mis en lumière un léger décalage de notre modèle, mais qui peuvent par exemple s'expliquer par le nombre de points utilisés pour calibrer le modèle. Les résultats sont tout de même apparus assez proches.
+En appliquant cette méthode aux données françaises, nous avons ainsi pu repérer plusieurs points de retournements.
+Afin de juger de la qualité de nos résultats, nous les avons comparé avec l'indicateur de retournement produit par l'Insee, ce qui a mis en lumière un léger décalage de notre modèle, mais qui peuvent par exemple s'expliquer par le nombre de points utilisés pour calibrer le modèle.
+Les résultats sont tout de même apparus assez proches.
 
-En conclusion, l'analyse des cycles économiques revêt depuis plusieurs années un enjeu majeur. Dans le contexte de crise sanitaire tel que nous le connaissons, il est important d'améliorer notre connaissance de l'activité économique afin de pouvoir juger de la relance post-Covid le moment venu. Par ailleurs, pouvoir anticiper la détection de point de retournement ou d'inflexion de l'économie pourrait être un outil essentiel pour aider les politiques à calibrer au mieux les aides apportées aux entreprises.
+En conclusion, l'analyse des cycles économiques revêt depuis plusieurs années un enjeu majeur.
+Dans le contexte de crise sanitaire tel que nous le connaissons, il est important d'améliorer notre connaissance de l'activité économique afin de pouvoir juger de la relance post-Covid le moment venu.
+Par ailleurs, pouvoir anticiper la détection de point de retournement ou d'inflexion de l'économie pourrait être un outil essentiel pour aider les politiques à calibrer au mieux les aides apportées aux entreprises.
+
+Dans le but d'effectuer des estimations en temps réel, le points faible de ce modèle est qu'il ne prend pas directement en compte les valeurs manquantes et donc les \emph{ragged-data}. En effet, dans ce modèle toutes les séries doivent avoir la même fréquence et la trimestrialisation implique une perte d'informations. Par ailleurs, en pratique les différentes séries macroéconomiques ne sont pas publiées en même temps (c'est ce qu'on appelle \emph{ragged-data}).
+Par exemple en France, les résultats des enquêtes de conjoncture sont disponibles dès la fin du mois alors que les comptes trimestriels ne le sont que 30 jours après la fin du trimestre.
+Pour prendre on compte ces deux points, le modèle autorégressif utilisé pourrait être amélioré utilisant par exemple un modèle espace-état.
 
 \newpage
 \appendix
@@ -434,14 +448,11 @@ En conclusion, l'analyse des cycles économiques revêt depuis plusieurs années
    \end{tabular}
    \caption{Variables utilisées dans l'analyse.}\label{tableau_var}}
   \footnotesize
-\emph{%%}
-Lecture : $S_i=1$ désigne les séries appartenant au groupe coïncident avec le cycle et $S_i=1$ celles appartenant au groupe en avance sur le cycle.}
+\emph{Lecture : $S_i=1$ désigne les séries appartenant au groupe coïncident avec le cycle et $S_i=1$ celles appartenant au groupe en avance sur le cycle.}
 
-\emph{%%}
-À part les indicateurs de la comptabilité nationale et certains soldes d'opinion de l'enquête de ocnjoncture dans les services avant 2003, toutes les variables sont mensuelles. Pour les trimestrialiser on calcule leur moyenne sur le trimestre puis on calcule la différence entre deux trimestres ($D_T$) ou l'évolution trimestrielle ($G_T$).}
+\emph{À part les indicateurs de la comptabilité nationale et certains soldes d'opinion de l'enquête de ocnjoncture dans les services avant 2003, toutes les variables sont mensuelles. Pour les trimestrialiser on calcule leur moyenne sur le trimestre puis on calcule la différence entre deux trimestres ($D_T$) ou l'évolution trimestrielle ($G_T$).}
 
-\emph{%%}
-Toutes les séries sont centrées-normées.}
+\emph{Toutes les séries sont centrées-normées.}
 \end{table}
 
 \newpage
@@ -449,8 +460,8 @@ Toutes les séries sont centrées-normées.}
 \nocite{*}
 
 \begin{thebibliography}{999}
-\bibitem[Sylvia Kaufmann (2010)]{Kaufmann} Kaufmann S. (2010). Dating and forecasting turning points by Bayesian clustering with dynamic structure: a suggestion with an application to Austrian data. Journal of Applied Econometrics, \textbf{25}(2): 309-344 
-\bibitem[Frühwirth-Schnatter S, Kaufmann S. (2008)]{FruhwirthKaufmann} Frühwirth-Schnatter S, Kaufmann S. (2008). Model-based clustering of multiple time series. Journal of Business and Economic Statistics \textbf{26}(1): 78
+\bibitem[Kaufmann (2010)]{Kaufmann} Kaufmann S. (2010). Dating and forecasting turning points by Bayesian clustering with dynamic structure: a suggestion with an application to Austrian data. Journal of Applied Econometrics, \textbf{25}(2): 309-344 
+\bibitem[Frühwirth-Schnatter et Kaufmann (2008)]{FruhwirthKaufmann} Frühwirth-Schnatter S, Kaufmann S. (2008). Model-based clustering of multiple time series. Journal of Business and Economic Statistics \textbf{26}(1): 78
 \bibitem[Bortoli \emph{et al} (2015)]{indretFR} Bortoli C., Gorin Y., Olive P.-D. et Renne C. (2015), « De nouvelles avancées dans l’utilisation des enquêtes de conjoncture de l’Insee pour le diagnostic conjoncturel », \emph{Note de Conjoncture}, mars, p. 21-41.
 \bibitem[Bardaji \emph{et al} (2009)]{bardaji} Bardaji J., Clavel L. et Tallet F.,(2009), « Constructing a Markov-Switching Turning Point Index Using Mixed Frequencies with an Application to French Business Survey Data », \emph{OECD Journal: Journal of Business Cycle Measurement and Analysis}, Vol. 2009/2.
 \end{thebibliography}
