@@ -60,7 +60,7 @@ L'ensemble du projet est disponible à l'adresse https://github.com/ARKEnsae/Bay
 # Introduction
 
 Dans son ouvrage *Les vagues longues de la conjoncture*, Nikolai Kondratiev mettait en évidence l'existence de cycles économiques formés de deux périodes, une phase ascendante puis une phase descendante.
-Bien que contestée et complétée par la suite par d'autres analyses, cette découverte des cycles économiques a très vite mené les chercheurs à essayer de savoir dans quelle phase l'économie se trouvait et, de fait, savoir déterminer et prévoir le moment le cycle s'inverse est un enjeu majeur.
+Bien que contestée et complétée par la suite par d'autres analyses, cette découverte des cycles économiques a très vite mené les chercheurs à essayer de savoir dans quelle phase l'économie se trouvait et, de fait, savoir déterminer et prévoir le moment où le cycle s'inverse est un enjeu majeur.
 C'est sur ce sujet que nous allons travailler ici, à partir de l'article intitulé "Dating and forecasting turning points by Bayesian clustering with dynamic structure: a suggestion with an application to Austrian data. Journal of Applied Econometrics" \cite{Kaufmann}.
 
 Ce papier poursuit un premier travail introduit par \cite{FruhwirthKaufmann}.
@@ -155,12 +155,12 @@ Dans l'étape 4, toutes les distributions a posteriori sont conjugées aux a pri
 
 L'article \cite{Kaufmann} a utilisé la spécification théorique présentée dans la partie précédente sur des données autrichiennes.
 Nous avons décidé dans le cadre de ce travail d'appliquer cela sur des données françaises.
-Nous avons donc récupéré un certain nombre de données liées au PIB ou aux enquêtes conjonctures[^1], dont le détail est expliqué dans le tableau \ref{tableau_var}.
+Nous avons donc récupéré un certain nombre de données liées au PIB ou aux enquêtes de conjoncture[^1], dont le détail est expliqué dans le tableau \ref{tableau_var}.
 
 [^1]: Nous avons décidé de ne retenir que les soldes d'opinion utilisés pour construire l'indicateur de retournement France publié par l'Insee (voir section \@ref(sec:indretFr)) en supposant que, pour sa construction, les soldes les plus pertinents pour détecter les points de retournement avaient été retenus par l'Insee.
     Nous avons également retenu deux indicateurs synthétiques publiés par l'Insee : le climat des affaires France, qui retrace le cycle conjoncturel, et le climat de l'emploi France, qui retrace le cycle conjoncturel spécifique de l'emploi salarié.
 
-Nous avons retenu ici $K=2$ groupes pour les séries : celles qui coïncident avec le cycle ($S_i = 1$) et celles qui le mène ($S_i = 2$).
+Nous avons retenu ici $K=2$ groupes pour les séries : celles qui coïncident avec le cycle ($S_i = 1$) et celles qui le mènent ($S_i = 2$).
 Pour l'analyse, nous nous limitons aux hypothèses suivantes :
 
 1.  La structure ($\rho^*$) est connue en avance : nous avons réparti chaque série dans un des groupes.
@@ -174,11 +174,11 @@ Nous avons adapté les programmes de \cite{Kaufmann} à nos données et nous ana
 Le modèle étudié ici se caractérise entre autres par la prise en compte de la spécification de l'hétérogénéité entre séries.
 Ceci est illustré par le graphique \@ref(heterogeneite).
 La figure \@ref(fig:heterogeneite1) représente la moyenne de la somme des paramètres autorégressifs.
-Comme dans l'article de \cite{Kaufmann}, sur les données français, nous pouvons noter l'importance de la prise en compte de l'hétérogénité.
+Comme dans l'article de \cite{Kaufmann}, sur les données françaises, nous pouvons noter l'importance de la prise en compte de l'hétérogénité.
 La figure \@ref(fig:heterogeneite2) représente la moyenne des variances $\frac{\sigma^2}{\lambda_i}$.
 Cette fois-ci, on note une différence avec ce que donnaient les données autrichiennes.
 En effet, notre distribution est plus étirée et plus applatie que celle de l'article.
-Cela montre que la dispersion de l'erreur de variance est plus faible, ce qui s'explique sans doute par le processus de standardisation des séries préalables et par le fait que nous travaillons sur moins de séries.
+Cela montre que la dispersion de l'erreur de variance est plus faible, ce qui s'explique sans doute par le processus de standardisation des séries préalable et par le fait que nous travaillons sur moins de séries.
 Le graphique \@ref(etats) représente la moyenne non-conditionnée de chaque groupe de série dans les deux états, selon qu'elles sont au-dessous ou au-dessus de la croissance moyenne.
 Cela permet d'illustrer que, contrairement à l'article, nos deux groupes de séries n'ont pas exactement le même comportement puisque les séries sont décalées les unes par rapport aux autres.
 
@@ -228,15 +228,15 @@ Cela s'explique par la façon dont la classification *a priori* a été effectu�
 \end{figure}
 ```
 Le graphique \@ref(graph3d) permet de visualiser l'effet de la corrélation avec le PIB et le carnet de commandes entre les groupes 1 (figure \@ref(fig:corgr1)) et 2 (figure \@ref(fig:corgr2)).
-La courbe représente $P(S = j|Z,Y^T) = \int P(S=j|Z,\gamma,\gamma_z)\pi(\gamma,\gamma_z|Y^T)\mathrm{d}\gamma\mathrm{d}\gamma_z$, la probabilité conditionnelle sur le PIB et le carnet de commande.
-Cette probabilité est la plus élevée pour les séries du groupe 1 qui sont fortement corrélées avec le PIB et corrélées positivement avec le carnet de commande, la corrélation avec le PIB semblant jouer un rôle plus important puisque la probabilité varie plus selon la valeur de cette dernière.
+La courbe représente $P(S = j|Z,Y^T) = \int P(S=j|Z,\gamma,\gamma_z)\pi(\gamma,\gamma_z|Y^T)\mathrm{d}\gamma\mathrm{d}\gamma_z$, la probabilité conditionnelle sur le PIB et le carnet de commandes.
+Cette probabilité est la plus élevée pour les séries du groupe 1 qui sont fortement corrélées avec le PIB et corrélées positivement avec le carnet de commandes, la corrélation avec le PIB semblant jouer un rôle plus important puisque la probabilité varie plus selon la valeur de cette dernière.
 Nous retrouvons ici la définition du premier groupe de variables qui contient celles qui sont coincidentes avec le cycle et donc corrélées avec le PIB.
 Pour le groupe 2, la valeur de la probabilité est maximale pour les séries fortement corrélées avec le carnet de commandes et cette variable semble être plus importante (la corrélation avec le PIB n'ayant pas une grande influence).
 Cela conforte les analyses tirées du graphique \@ref(pi-gamma).
 
-La hauteur des lignes verticales du graphique \@ref(graph3d) représente la probabilité $P(S_i = j|Z_i,Y^T)$ a posteriori pour une série d'appartenir aux groupes 1 et 2.
+La hauteur des lignes verticales du graphique \@ref(graph3d) représente la probabilité $P(S_i = j|Z_i,Y^T)$ *a posteriori* pour une série d'appartenir aux groupes 1 et 2.
 Dans la grande majorité des cas, cette probabilité a été mise à jour à 0 ou à 1, grâce à l'information supplémentaire obtenue.
-Cela permet de vérifier la qualité de notre pré-classification : elle semble cohérente car les séries classées dans le groupe coïncident ont une forte probabilité a posterori d'appartenir à ce groupe, et de même pour les séries classées dans le groupe avancé.
+Cela permet de vérifier la qualité de notre pré-classification : elle semble cohérente car les séries classées dans le groupe coïncident ont une forte probabilité *a posterori* d'appartenir à ce groupe, et de même pour les séries classées dans le groupe avancé.
 ```{=tex}
 \begin{figure}[htb]
 \centering
@@ -253,7 +253,7 @@ Les résultats semblent significatifs puisque les probabilités ont des valeurs 
 On peut donc repérer ici différents points de retournement qui correspondent à des réels évènements sur les marchés financiers en 1996 et 1999 (crise financière asiatique), 2002 et 2003 (krach boursier), 2009 (crise économique mondiale) ou encore 2013 (fin de la crise de 2008 avec encore des répercutions en France).
 
 Afin de juger de la robustesse de notre modèle, nous avons regardé ce qui changeait lorsque l'analyse commençait soit en 1992, soit en 2004^[
-Car certains soldes d'opinion dans l'enquêtes de conjoncture dans les services étaient trimestriels avant 2004 et mensuels après 2004: la dynamique de ces variables ont donc pu changer à cette date.
+Car certains soldes d'opinion dans l'enquêtes de conjoncture dans les services étaient trimestriels avant 2004 et mensuels après 2004 : la dynamique de ces variables ont donc pu changer à cette date.
 ], et quand elle se terminait soit en 2019, soit en 2020 (pour prendre en compte ou non les données de la crise du Covid-19). Les résultats sont résumés dans le graphique \ref{fig:impactdate}. 
 On remarque que la date de début de l'analyse semble avoir un rôle dans la détection de certains points de retournement. En effet, quand l'analyse commence en 2004, le point de retournement autour de 2013 n'est plus détecté, peut-être est-ce dû au à l'influence de la crise de 2009 sur les estimations des modèles autorégressifs.
 En revanche, que l'on termine l'analyse en 2019 ou en 2020, on note assez peu de différences : la crise du Covid-19, bien qu'ayant une influence extrême sur les séries, ne change pas le diagnostic sur les estimations passées des points de retournement.
@@ -294,7 +294,7 @@ Il évolue donc entre $+1$ et $-1$ : un point très proche de $+1$ (respectiveme
 Les moments où l'indicateur est proche de 0 sont assimilés à des phases de stabilisation, c'est-à-dire de retour du rythme de croissance de l'activité vers sa moyenne de long terme.
 
 Pour juger de la pertinence de la détection des points de retournement, il est nécessaire de disposer d'une datation des cycles d'expansion ou de contraction de l'activité.
-Pour avoir une datation de référence, nous appliquons la méthode décrite par \cite{bardaji} : à partir du PIB trimestriel en volume, nous extrayon la composante cyclique de la série autour de sa tendance grâce à un filtre de Christiano-Fitzgerald en retenant des cycles d’une durée de 1,5 à 10 ans et une règle de censure pour éliminer les phases de moins de 4 trimestre.
+Pour avoir une datation de référence, nous appliquons la méthode décrite par \cite{bardaji} : à partir du PIB trimestriel en volume, nous extrayons la composante cyclique de la série autour de sa tendance grâce à un filtre de Christiano-Fitzgerald en retenant des cycles d’une durée de 1,5 à 10 ans et une règle de censure pour éliminer les phases de moins de 4 trimestres.
 Cela permet de déterminer les phases de ralentissement et d'accélération du PIB par rapport à sa tendance. 
 Les comptes nationaux étant encore provisoires à partir de 2018, la datation l'est également à partir de cette date.
 
@@ -330,7 +330,7 @@ Pour prendre en compte que certaines séries sont en avance sur le cycle économ
 Les distributions *a posteriori* permettent ensuite de repérer les points de retournement.
 
 En appliquant cette méthode aux données françaises, nous avons ainsi pu repérer plusieurs points de retournements. 
-Afin de juger de la qualité de nos résultats, nous les avons comparé avec l'indicateur de retournement produit par l'Insee, ce qui a mis en lumière un léger décalage de notre modèle, mais qui peuvent par exemple s'expliquer par le nombre de points utilisés pour calibrer le modèle. 
+Afin de juger de la qualité de nos résultats, nous les avons comparé avec l'indicateur de retournement produit par l'Insee, ce qui a mis en lumière un léger décalage de notre modèle, mais qui peut par exemple s'expliquer par le nombre de points utilisés pour calibrer le modèle. 
 Les résultats sont tout de même apparus assez proches.
 
 En conclusion, l'analyse des cycles économiques revêt depuis plusieurs années un enjeu majeur. 
