@@ -26,7 +26,7 @@ https://github.com/ARKEnsae/BayesianTurningPoint/raw/main/programmes/logit1_dyn0
 run 'plot_ALL'
 ```
 
-Ces programmes sont adaptés de ceux de Kaufmann (2010) afin qu'ils puissent être appliqués aux données françaises.
+Ces programmes sont une adaptation de ceux de Kaufmann (2010) (http://qed.econ.queensu.ca/jae/2010-v25.2/kaufmann/) afin qu'ils puissent être appliqués aux données françaises
 
 La datation de référence des cycles de croissance peut-être obtenue depuis R avec le code suivant :
 
