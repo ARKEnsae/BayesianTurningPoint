@@ -2,7 +2,6 @@ library(AQLTools)
 library(mFilter)
 library(zoo)
 # pib <- window(na.omit(AQLTools::lectureBDM("010565692")), start = 1990, end = c(2018,4))
-# pib_vol <-window(na.omit(AQLTools::lectureBDM("010565708")), start = 1990, end = c(2018,4))
 # ind_ret <- window(na.omit(AQLTools::lectureBDM("001565531")), start = 1992)
 pib <- structure(c(0.7, 0.4, 0.4, 0.3, 0, 0.3, 0.3, 0.4, 1, -0.1, 0, 
 				   -0.2, -0.6, 0.1, 0.2, 0.2, 0.8, 1.1, 0.6, 0.9, 0.6, 0.4, 0.2, 
@@ -14,22 +13,6 @@ pib <- structure(c(0.7, 0.4, 0.4, 0.3, 0, 0.3, 0.3, 0.4, 1, -0.1, 0,
 				   -0.2, 0.2, -0.1, 0, 0.7, 0, 0.5, 0.1, 0.1, 0.4, 0.1, 0.5, 0, 
 				   0.4, 0.1, 0.7, -0.2, 0.2, 0.6, 0.8, 0.7, 0.7, 0.8, 0.1, 0.2, 
 				   0.4, 0.6), .Tsp = c(1990, 2018.75, 4), class = "ts")
-pib_vol <-structure(c(368384, 369679, 371314, 372255, 372104, 373362, 374567, 
-					  376160, 380013, 379699, 379844, 379042, 376671, 376929, 377512, 
-					  378318, 381156, 385212, 387460, 390869, 393033, 394682, 395310, 
-					  396018, 398253, 399235, 401495, 402063, 403434, 408009, 410947, 
-					  415644, 419166, 423000, 425988, 429107, 431489, 435163, 440273, 
-					  446300, 450646, 454958, 457804, 461479, 464187, 464749, 466280, 
-					  466167, 467856, 470133, 471873, 471936, 472710, 471653, 474891, 
-					  478451, 482883, 486039, 487462, 491013, 492310, 493204, 495709, 
-					  499420, 503293, 508409, 508421, 512523, 516251, 520316, 522034, 
-					  523194, 525541, 523105, 521458, 514150, 505610, 505111, 505898, 
-					  509550, 511510, 514156, 517167, 520744, 526153, 526398, 527913, 
-					  529114, 529709, 528723, 529764, 529341, 529192, 532813, 532899, 
-					  535471, 536190, 536632, 538953, 539576, 542383, 542259, 544168, 
-					  544707, 548486, 547254, 548531, 551622, 556050, 560198, 564123, 
-					  568772, 569499, 570838, 572938, 576507), .Dim = c(116L, 1L), .Dimnames = list(
-					  	NULL, "010565708"), .Tsp = c(1990, 2018.75, 4), class = "ts")
 ind_ret <- structure(c(-0.88, -0.84, -1, -1, -0.98, -1, -1, -1, -1, -1, 
 					   -1, -1, -1, -0.75, -0.76, -0.51, -0.98, -1, -0.99, -0.85, -0.67, 
 					   -0.52, -0.25, 0.39, 0.96, 1, 1, 1, 0.97, 0.96, 0.99, 1, 1, 0.99, 
@@ -82,17 +65,15 @@ simpl_cycle <- function(x, min_phase=4){
 	}
 	x
 }
-hp <- hpfilter(pib,freq = 1600,drift = TRUE)
 cff <- cffilter(pib,pl = 1.5*4, pu = 10*4)
-cff2 <- cffilter(pib_vol,pl = 1.5*4, pu = 10*4)
 
-conj <- 2*((hp$cycle)>=0) - 1
-conj2 <- 2*((cff$cycle)>=0) - 1
-conj3 <- 2*((cff2$cycle)>=0) - 1
-simpl_cycle(conj2)
-plot(simpl_cycle(conj2),xlim = c(1992,2020))
+conj <- 2*((cff$cycle)>=0) - 1
+simpl_cycle(conj)
+
+plot(simpl_cycle(conj),xlim = c(1992,2020))
 lines(ind_ret, col = "red")
-AQLTools::hc_stocks(ts.union(simpl_cycle(conj2)))
+
+AQLTools::hc_stocks(ts.union(simpl_cycle(conj)))
 
 detect_tp <- function(x){
 	x <- c(NA, as.numeric(x), NA)
@@ -116,12 +97,11 @@ detect_tp <- function(x){
 }
 probMS <- read.csv("programmes/probMS.csv",header = FALSE)
 proba <- ts(as.numeric(probMS[1,]), start = 1992,frequency = 4)
-proba
-detect_tp(probMS[1,])[1:2]
-detect_tp(probMS[2,])[1:2]
+
+
 ret_pic <- detect_tp(probMS[1,])$ts_pic
 ret_creux <- detect_tp(probMS[1,])$ts_creux
-AQLTools::hc_stocks(ts.union(simpl_cycle(conj2), ret_pic, ret_creux,
+AQLTools::hc_stocks(ts.union(simpl_cycle(conj), ret_pic, ret_creux,
 								 proba),type = c("line","line","line","column"))
 
 
@@ -158,7 +138,7 @@ p0 <- ggplot() +
 	geom_rect(aes(xmin = xmin, xmax = xmax,
 				  ymin = ymin, ymax = ymax,
 				  fill = "g1"),
-			  data = data_rect(conj2),
+			  data = data_rect(conj),
 			  alpha = 0.5,
 			  inherit.aes = FALSE)+
 	geom_rect(aes(xmin = xmin, xmax = xmax,
