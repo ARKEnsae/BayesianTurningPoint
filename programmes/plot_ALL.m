@@ -1,4 +1,5 @@
 %program to plot some interesting output for various estimated models
+date_deb = 1992
 
 span=28;
 rest_diff=0;

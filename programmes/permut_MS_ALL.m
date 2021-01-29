@@ -1,10 +1,6 @@
 %program to identify various estimated models
 
-%cal_beg=[1990:1997];
-% cal_beg=[1995];
-% cal_end=[1986:2003];
-% ifig=1;
-% group=0; %(1) sort beta^G, (2) sort beta^R, (3) sort beta^G-beta^R, (4) sort etaMS_jj, (5) sort istar
+date_deb = 1992;
 span=28;
 pool=1;
 shrink=1;
